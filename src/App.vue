@@ -1,11 +1,16 @@
 <template lang="pug">
   div#app
-    div
-      div(v-if="showSidebar")
-        sidebar
+    div.container-fluid
+      div.row
+        router-view.col-sm-12
+        div(v-if="showSidebar")
+          sidebar
     button(@click="showSidebar = !showSidebar")
-      サイドバー
-    router-view
+      | サイドバー
+    div
+      | Logo created by
+      a(href="https://www.designevo.com/logo-maker/" title="Free Online Logo Maker")
+        |DesignEvo logo maker
 </template>
 
 <script>
@@ -24,6 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

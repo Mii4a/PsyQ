@@ -1,9 +1,9 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <p></p>
-  </div>
+<template lang="pug">
+  div.home.container
+    div.home-title
+      h1.home-title_logo PSYCHOLO
+      p  Welcome to PSYCHOLO
+
 </template>
 
 <script>
@@ -18,3 +18,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.home-title_logo {
+  font-family: 'Mandali', sans-serif;
+}
+</style>
