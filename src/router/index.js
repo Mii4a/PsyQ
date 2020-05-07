@@ -1,9 +1,10 @@
+import About from '@/views/About.vue'
+import Home from '@/views/Home.vue'
+import Signin from '@/views/Signin.vue'
+import Signup from '@/views/Signup.vue'
+import WorkbooksHome from '@/views/WorkbooksHome.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import About from '../views/About.vue'
-import Home from '../views/Home.vue'
-import Signin from '../views/Signin.vue'
-
 Vue.use(VueRouter)
 
 const routes = [{
@@ -20,9 +21,19 @@ const routes = [{
     component: About
   },
   {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
     path: '/signin',
     name: 'Signin',
     component: Signin
+  },
+  {
+    path: '/workbooks-home',
+    name: 'WorkbooksHome',
+    component: WorkbooksHome
   }
 ]
 

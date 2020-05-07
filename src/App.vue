@@ -1,16 +1,7 @@
 <template lang="pug">
   div#app
-    div.container-fluid
-      div.row
-        router-view.col-sm-12
-        div(v-if="showSidebar")
-          sidebar
-    button(@click="showSidebar = !showSidebar")
-      | サイドバー
-    div
-      | Logo created by
-      a(href="https://www.designevo.com/logo-maker/" title="Free Online Logo Maker")
-        |DesignEvo logo maker
+    b-container(fluid)
+      router-view
 </template>
 
 <script>
