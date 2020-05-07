@@ -1,13 +1,12 @@
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
+import { plainAxiosInstance, securedAxiosInstance } from './axios'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import VueAxios from 'vue-axios'
-import {
-  securedAxiosInstance,
-  plainAxiosInstance
-} from './axios'
 
 Vue.use(VueAxios, {
   secured: securedAxiosInstance,

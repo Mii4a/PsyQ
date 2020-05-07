@@ -1,13 +1,27 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/signin">Signin</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang="pug">
+  div#app
+    div
+      div(v-if="showSidebar")
+        sidebar
+    button(@click="showSidebar = !showSidebar")
+      サイドバー
+    router-view
 </template>
+
+<script>
+import Sidebar from './components/Sidebar'
+
+export default {
+  components: {
+    Sidebar
+  },
+  data () {
+    return {
+      showSidebar: false
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

@@ -62,7 +62,6 @@ export default {
     checkSignedIn () {
       if (localStorage.signedIn) {
         this.$router.replace('/')
-        console.log('you logged in')
       }
     }
   },
