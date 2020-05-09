@@ -10,6 +10,11 @@ export default new Vuex.Store({
   mutations: {
     fetchSignedIn (state) {
       state.signedIn = !!localStorage.signedIn
+    },
+    checkSignedIn(state) {
+      if (state.signedIn == localStorage.signedIn) {
+
+      }
     }
   },
   actions: {

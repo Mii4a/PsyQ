@@ -7,7 +7,8 @@ const securedAxiosInstance = axios.create({
   withCredentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN
   }
 })
 
@@ -16,7 +17,8 @@ const plainAxiosInstance = axios.create({
   withCredentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN
   }
 })
 
@@ -37,7 +39,6 @@ securedAxiosInstance.interceptors.response.use(null, error => {
     return plainAxiosInstance.post( process.env.VUE_APP_API + 'refresh', {}, {
         headers: {
           'X-CSRF-TOKEN': localStorage.csrf,
-          'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN
         }
       })
       .then(response => {

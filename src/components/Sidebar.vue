@@ -1,15 +1,11 @@
-<template>
-  <div>
-    <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/about">
-        About
-      </router-link> |
-      <router-link to="/signin">
-        Signin
-      </router-link>
-    </div>
-  </div>
+<template lang="pug">
+  div
+    b-sidebar#sidebar-right(title="Sidebar" right shadow)
+      div.px-3.py-2
+        router-link(to='/workbooks-home')
+          | Home
+        router-link(to='/workbooks-home')
+          | About
+        router-link(to='/workbooks-home')
+          | Home
 </template>

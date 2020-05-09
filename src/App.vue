@@ -1,20 +1,18 @@
 <template lang="pug">
   div#app
+    Header
     b-container(fluid)
       router-view
+    Sidebar
 </template>
 
 <script>
 import Sidebar from './components/Sidebar'
+import Header from './components/Header'
 
 export default {
   components: {
-    Sidebar
-  },
-  data () {
-    return {
-      showSidebar: false
-    }
+    Header, Sidebar
   }
 }
 </script>
