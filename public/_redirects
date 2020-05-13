@@ -1,0 +1,4 @@
+# Netlify settings for single-page application
+/workbooks/* https://5ebc7c2e17526d005b15eb04--nifty-galileo-eb630a.netlify.app/workbooks 200
+/signin/* https://5ebc7c2e17526d005b15eb04--nifty-galileo-eb630a.netlify.app/signin 200
+/*    /index.html   200
