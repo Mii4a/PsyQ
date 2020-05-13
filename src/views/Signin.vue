@@ -64,12 +64,14 @@ export default {
   },
   methods: {
     signin () {
+      headers = {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Token ' + process.env.VUE_APP_API_TOKEN
+      }
       this.$http.plain.post(process.env.VUE_APP_API + 'login', {
         email: this.email,
         password: this.password,
-        headers: {
-          'Content-type': 'application/json'
-        }
+        headers: { headers }
       }).then(response => this.signInSuccessful(response))
         .catch(error => this.signInFailed(error))
     },
