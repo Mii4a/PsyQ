@@ -82,7 +82,7 @@ export default {
       localStorage.signedIn = true
       this.$store.dispatch('doFetchSignedIn')
       this.error = ''
-      this.$router.replace('/workbooks-home')
+      this.$router.replace('/workbooks')
     },
     signInFailed (error) {
       this.error = (error.response && error.response.data && error.response.data.error) || ''
@@ -91,7 +91,7 @@ export default {
     },
     checkSignedIn () {
       if (localStorage.signedIn) {
-        this.$router.replace('/workbooks-home')
+        this.$router.replace('/workbooks')
       }
     }
   }

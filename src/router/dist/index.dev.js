@@ -13,7 +13,9 @@ var _Signin = _interopRequireDefault(require("@/views/Signin.vue"));
 
 var _Signup = _interopRequireDefault(require("@/views/Signup.vue"));
 
-var _WorkbooksHome = _interopRequireDefault(require("@/views/WorkbooksHome.vue"));
+var _WorkbookIndex = _interopRequireDefault(require("@/views/WorkbookIndex.vue"));
+
+var _WorkbookShow = _interopRequireDefault(require("@/views/WorkbookShow.vue"));
 
 var _vue = _interopRequireDefault(require("vue"));
 
@@ -43,9 +45,13 @@ var routes = [{
   name: 'Signin',
   component: _Signin["default"]
 }, {
-  path: '/workbooks-home',
-  name: 'WorkbooksHome',
-  component: _WorkbooksHome["default"]
+  path: '/workbooks',
+  name: 'WorkbookIndex',
+  component: _WorkbookIndex["default"]
+}, {
+  path: 'workbook/:id',
+  name: 'WorkbookShow',
+  component: _WorkbookShow["default"]
 }];
 var router = new _vueRouter["default"]({
   mode: 'history',

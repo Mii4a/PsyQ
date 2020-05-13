@@ -2,7 +2,8 @@ import About from '@/views/About.vue'
 import Home from '@/views/Home.vue'
 import Signin from '@/views/Signin.vue'
 import Signup from '@/views/Signup.vue'
-import WorkbooksHome from '@/views/WorkbooksHome.vue'
+import WorkbookIndex from '@/views/WorkbookIndex.vue'
+import WorkbookShow from '@/views/WorkbookShow.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -31,9 +32,14 @@ const routes = [{
     component: Signin
   },
   {
-    path: '/workbooks-home',
-    name: 'WorkbooksHome',
-    component: WorkbooksHome
+    path: '/workbooks',
+    name: 'WorkbookIndex',
+    component: WorkbookIndex
+  },
+  {
+    path: 'workbook/:id',
+    name: 'WorkbookShow',
+    component: WorkbookShow
   }
 ]
 
