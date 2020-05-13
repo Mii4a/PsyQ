@@ -15,7 +15,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var API_URL = 'http://localhost:5100';
+var API_URL = process.env.VUE_APP_API_BASE;
 
 var securedAxiosInstance = _axios["default"].create({
   baseURL: API_URL,

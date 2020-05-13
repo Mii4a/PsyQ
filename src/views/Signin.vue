@@ -71,7 +71,7 @@ export default {
       this.$http.plain.post(process.env.VUE_APP_API + 'login', {
         email: this.email,
         password: this.password,
-        headers: { headers }
+        headers: headers
       }).then(response => this.signInSuccessful(response))
         .catch(error => this.signInFailed(error))
     },
