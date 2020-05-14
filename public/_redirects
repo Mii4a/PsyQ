@@ -1,4 +1,2 @@
 # Netlify settings for single-page application
-/workbooks /workbooks 200
-/signin /signin 200
-/    /index.html   301
+/*    /index.html   301
