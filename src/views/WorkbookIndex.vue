@@ -4,6 +4,8 @@
     div(@click='signOut')
       | logout
     b-form
+      div {{ this.error }}
+      div {{ this.info }}
       b-form-input(v-model="subjectName" type="text")
       b-form-input(v-model="subjectExplanation" type="text")
       b-form-file(type="file" accept="image/jpeg, image/png" @change="onImageChange")
@@ -33,6 +35,8 @@ export default{
       subjectExplanation: '',
       subjectImage: [],
       preSignedPost: '',
+      error: '',
+      info: ''
     }
   },
   props: {
@@ -112,7 +116,10 @@ export default{
           subject_explanation: this.subjectExplanation,
           subject_image: this.subjectImage
         }
-      })
+      }).then(response => {
+        this.info = response
+        this.$router.replace('/workbooks')
+      }).catch(error => setError(error))
     }
   },
   created() {
