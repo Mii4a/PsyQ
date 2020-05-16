@@ -1,16 +1,29 @@
 <template lang="pug">
-  div.home
+  div.signed-home
+    div.signed-home--container
+      b-row.psychologies
+        psychology-link(
+          category='基礎'
+          color='red'
+          font-awesome-icon='brain'
+          link-to='/basic-psychology'
+        )
+        div.psychologies--category.applied-psychology
+          router-link(to="applied-psycholody")
+            |
     bottom-navigation
 </template>
 
 <script>
 import axios from 'axios'
 import BottomNavigation from '@/components/BottomNavigation'
+import PsychologyLink from '@/components/PsychologyLink'
 
 export default{
   name: 'HomeAfterSignedIn',
   components: {
-    BottomNavigation
+    BottomNavigation,
+    PsychologyLink
   },
   data() {
     return {
@@ -110,8 +123,15 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
-.workbooks{
-  border: 1px solid #000;
-  height: 50px;
+.psychologies {
+  margin: 0 0;
+  &--category {
+
+  }
+}
+.signed-home {
+  &--container {
+    padding: 10% 10%
+  }
 }
 </style>
