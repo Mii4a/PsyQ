@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var _default={user:function(e){return e.user},signedIn:function(e){return e.signedIn},workbooks:function(e){return e.workbooks}};exports.default=_default;

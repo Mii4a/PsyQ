@@ -1,54 +1,29 @@
-<template>
-  <div class="container">
-    <h1 class="#f3e5f5 purple lighten-5 center">
-      Sign In
-    </h1>
-    <form
-      class="col"
-      @submit.prevent="signin"
-    >
-      <div v-if="error" class="text-red">
-        {{ error }}
-      </div>
-
-      <div class="row">
-        <div class="input-field">
-          <input
-            v-model="email"
-            placeholder="Email"
-            type="text"
-            class="validate"
-            required="required"
-          >
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field">
-          <input
-            v-model="password"
-            placeholder="Password"
-            type="text"
-            class="validate"
-            required="required"
-          >
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        class="btn waves-effect waves-light"
-      >
-        Sign In
-      </button>
-    </form>
-  </div>
+<template lang="pug">
+  div.signin
+    div.signin--container
+      session-form-title(session-title="Signin")
+      b-form(@submit.prevent="signin")
+        b-form-group(label="Eメール" label-for="email")
+          b-form-input#email(v-model="email" type="text")
+        b-form-group(label="パスワード" label-for="password")
+          b-form-input#password(v-model="password" type="text")
+        base-submit-button(button-message="ログイン")
+        div.to-signup.text-right
+          router-link(to="/signup")
+            | 登録が済んでいない方はこちら
 </template>
 
 <script>
 import axios from 'axios'
-axios.defaults.headers.common['Authorization'] = 'Token ' + process.env.VUE_APP_API_TOKEN
+import SessionFormTitle from '@/components/SessionFormTitle'
+import BaseSubmitButton from '@/components/BaseSubmitButton'
+
 export default {
   name: 'Signin',
+  components: {
+    SessionFormTitle,
+    BaseSubmitButton
+  },
   data () {
     return {
       email: '',
@@ -64,9 +39,9 @@ export default {
   },
   methods: {
     signin () {
-      headers = {
+      const headers = {
         'Content-Type': 'application/json',
-        'Authorization' : 'Token ' + process.env.VUE_APP_API_TOKEN
+        'Authorization' : 'Bearer ' + process.env.VUE_APP_API_TOKEN
       }
       this.$http.plain.post(process.env.VUE_APP_API + 'login', {
         email: this.email,
@@ -83,8 +58,9 @@ export default {
       localStorage.csrf = response.data.csrf
       localStorage.signedIn = true
       this.$store.dispatch('doFetchSignedIn')
+      this.$store.dispatch('doFetchUser', response.data.name)
       this.error = ''
-      this.$router.replace('/workbooks')
+      this.$router.replace('/home')
     },
     signInFailed (error) {
       this.error = (error.response && error.response.data && error.response.data.error) || ''
@@ -99,3 +75,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.signin {
+  &--container {
+    padding: 10px;
+  }
+}
+
+</style>

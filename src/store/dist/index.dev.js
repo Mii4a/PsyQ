@@ -9,28 +9,44 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vuex = _interopRequireDefault(require("vuex"));
 
+var _getters = _interopRequireDefault(require("./getters.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
 
 var _default = new _vuex["default"].Store({
   state: {
-    signedIn: ''
+    user: [],
+    signedIn: false,
+    workbooks: []
   },
   mutations: {
+    fetchUser: function fetchUser(state, user) {
+      state.user = user;
+    },
     fetchSignedIn: function fetchSignedIn(state) {
       state.signedIn = !!localStorage.signedIn;
     },
-    checkSignedIn: function checkSignedIn(state) {
-      if (state.signedIn == localStorage.signedIn) {}
+    fetchWorkbooks: function fetchWorkbooks(state, workbooks) {
+      state.workbooks = workbooks;
     }
   },
   actions: {
-    doFetchSignedIn: function doFetchSignedIn(_ref) {
+    doFetchUser: function doFetchUser(_ref, user) {
       var commit = _ref.commit;
+      commit('fetchUser', user);
+    },
+    doFetchSignedIn: function doFetchSignedIn(_ref2) {
+      var commit = _ref2.commit;
       commit('fetchSignedIn');
+    },
+    doFetchWorkbooks: function doFetchWorkbooks(_ref3, workbooks) {
+      var commit = _ref3.commit;
+      commit('fetchWorkbooks', workbooks);
     }
   },
+  getters: _getters["default"],
   modules: {}
 });
 

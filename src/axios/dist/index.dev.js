@@ -19,7 +19,7 @@ var API_URL = process.env.VUE_APP_API_BASE;
 
 var securedAxiosInstance = _axios["default"].create({
   baseURL: API_URL,
-  withCredentials: 'include',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',

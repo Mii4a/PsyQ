@@ -5,7 +5,7 @@ const API_URL = process.env.VUE_APP_API_BASE
 
 const securedAxiosInstance = axios.create({
   baseURL: API_URL,
-  withCredentials: 'include',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',

@@ -1,34 +1,33 @@
 <template lang="pug">
   div#app
-    Header
     b-container(fluid)
       router-view
-    Sidebar
+    TheSidebar
 </template>
 
 <script>
-import Sidebar from './components/Sidebar'
-import Header from './components/Header'
+import TheSidebar from '@/components/TheSidebar'
+
 
 export default {
   components: {
-    Header, Sidebar
+    TheSidebar,
   },
   data() {
     return {
       value: ''
     }
-  }
+  },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 

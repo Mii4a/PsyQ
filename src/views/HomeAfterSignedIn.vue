@@ -1,35 +1,19 @@
 <template lang="pug">
-  div
-    | WorkbooksHome
-    div(@click='signOut')
-      | logout
-    b-form
-      div {{ this.error }}
-      div {{ this.info }}
-      b-form-input(v-model="subjectName" type="text")
-      b-form-input(v-model="subjectExplanation" type="text")
-      b-form-file(type="file" accept="image/jpeg, image/png" @change="onImageChange")
-      p.mt-3 Selected file: {{ subjectImage ? subjectImage.name : 'Not selected'}}
-      b-button(type="submit" @click="upload")
-    b-container
-      p {{ workbooks }}
-      b-row
-        div.workbooks(v-for="workbook in workbooks" cols="6")
-          b-link(:to="'workbook/' + Number(workbook.id)")
-            p {{ workbook.subject_name }}
-            img
-
-
+  div.home
+    bottom-navigation
 </template>
 
 <script>
 import axios from 'axios'
+import BottomNavigation from '@/components/BottomNavigation'
 
 export default{
-  name: 'WorkbookIndex',
+  name: 'HomeAfterSignedIn',
+  components: {
+    BottomNavigation
+  },
   data() {
     return {
-      workbooks: [],
       workbookId: '',
       subjectName: '',
       subjectExplanation: '',
@@ -39,37 +23,25 @@ export default{
       info: ''
     }
   },
-  props: {
-    value: {
-      type: String
-    }
+  computed: {
   },
   methods: {
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
-    signOut() {
-      this.$http.secured.delete(process.env.VUE_APP_API + `logout`, {
-         headers: {'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN}
-         }).then(response => {
-           delete localStorage.csrf
-           delete localStorage.signedIn
-           this.$router.replace('/')
-         }).catch(error => {
-           this.setError(error, 'Cannot sign out')
-         })
-    },
     getWorkbooks() {
       axios.get(process.env.VUE_APP_API + 'workbooks', {
-      headers: { 'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN }
+      headers: { 'Authorization': 'Bearer ' + process.env.VUE_APP_API_TOKEN }
       }).then(response => {
-        this.workbooks = response.data
+        const workbooks = response.data
+        this.workbooks = workbooks
+        this.$store.dispatch('doFetchWorkbooks', workbooks)
       })
     },
     async uploadFile(file) {
       const apiUrl = process.env.VUE_APP_API + 'api/v1/workbooks/' + this.id + '/upload'
       const apiToken = 'Token ' + process.env.VUE_APP_API_TOKEN
-      await axios.get(apiUrl, {headers: {
+      await this.$http.secured.get(apiUrl, {headers: {
         Authorization: apiToken
       }}).then(res => {
         this.preSignedPost = res.data
@@ -109,7 +81,7 @@ export default{
       }
       return result
     },
-    upload() {
+    async upload() {
       axios.post(process.env.VUE_APP_API + 'workbooks', {
         workbook: {
           subject_name: this.subjectName,
@@ -120,13 +92,20 @@ export default{
         this.info = response
         this.$router.replace('/workbooks')
       }).catch(error => setError(error))
+    },
+    checkSignedIn() {
+      if (!localStorage.signedIn) {
+        this.$router.replace('/signin')
+      }
     }
   },
   created() {
     this.getWorkbooks()
+    this.checkSignedIn()
   },
   uploaded() {
     this.getWorkbooks()
+    this.checkSignedIn()
   }
 }
 </script>
