@@ -1,12 +1,14 @@
 <template lang="pug">
   div.signed-home
     div.signed-home--container
+      
       b-row.psychologies
         psychology-link(
-          category='基礎'
-          color='red'
-          font-awesome-icon='brain'
-          link-to='/basic-psychology'
+          v-for="psychology in psychologies"
+          :key="psychology.category"
+          :category="psychology.category"
+          :font-awesome-icon="psychology.fontAwesomeIcon"
+          :link-to="psychology.linkTo"
         )
         div.psychologies--category.applied-psychology
           router-link(to="applied-psycholody")
@@ -27,13 +29,19 @@ export default{
   },
   data() {
     return {
-      workbookId: '',
-      subjectName: '',
-      subjectExplanation: '',
-      subjectImage: [],
-      preSignedPost: '',
       error: '',
-      info: ''
+      psychologies: [
+        {
+          category: '基礎',
+          fontAwesomeIcon: 'graduation-cap',
+          linkTo: '/basic-psychology'
+        },
+        {
+          category: '応用',
+          fontAwesomeIcon: 'hand-holding-heart',
+          linkTo: '/aplied-psychology'
+        }
+      ]
     }
   },
   computed: {
@@ -123,15 +131,9 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
-.psychologies {
-  margin: 0 0;
-  &--category {
-
-  }
-}
 .signed-home {
   &--container {
-    padding: 10% 10%
+    padding: 12% 10%
   }
 }
 </style>

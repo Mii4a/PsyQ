@@ -1,7 +1,7 @@
 <template lang="pug">
   div.psychology-link
-    router-link.psychology-link--container(:to="linkTo")
-      div.d-flex
+    router-link(:to="linkTo")
+      div.psychology-link--container.d-flex
         div.psychology-link--container__left
           div.psychology-icon(:class="`background-color--${color}`")
             font-awesome-icon(:icon="[`fas`,fontAwesomeIcon]")
@@ -22,7 +22,12 @@ export default {
     },
     color: {
       type: String,
-      required: true
+      required: true,
+      default: 'red'
+    },
+    count: {
+      type: String,
+      default: '1'
     },
     fontAwesomeIcon: {
       type: String,
@@ -37,11 +42,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.psychology-category {
+  color: #777;
+  font-size: 1.2rem;
+  padding-top: 7px;
+}
+.psychology-icon {
+  background-color: #22bbaa;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  height: 40px;
+  padding-top: 7px;
+  text-align: center;
+  width: 40px;
+}
 .psychology-link {
-  height: 70px;
+  height: 60px;
+  margin-bottom: 15px;
   width: 100%;
   &--container {
-    padding: 10px 10px;
+    padding: 10px 15px;
+    border: 1px solid rgba(34, 176, 110, .1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     &__left {
       width: 30%;
     }
