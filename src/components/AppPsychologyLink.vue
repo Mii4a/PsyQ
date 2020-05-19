@@ -1,6 +1,6 @@
 <template lang="pug">
   div.psychology-link
-    router-link(:to="linkTo")
+    router-link(:to="'/psychology-index'")
       div.psychology-link--container.d-flex
         div.psychology-link--container__left
           div.psychology-icon(:class="`background-color--${color}`")
@@ -14,16 +14,11 @@
 <script>
 
 export default {
-  name: "PsychologyLink",
+  name: "AppPsychologyLink",
   props: {
     category: {
       type: String,
       required: true
-    },
-    color: {
-      type: String,
-      required: true,
-      default: 'red'
     },
     count: {
       type: String,

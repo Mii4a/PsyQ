@@ -18,7 +18,7 @@
 
 <script>
 export default{
-  name: "TheBottomNavigation",
+  name: "AppBottomNavigation",
 }
 </script>
 

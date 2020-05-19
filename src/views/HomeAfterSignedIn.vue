@@ -1,31 +1,29 @@
 <template lang="pug">
   div.signed-home
+    app-section-title(section-title="Home")
     div.signed-home--container
-      
-      b-row.psychologies
-        psychology-link(
-          v-for="psychology in psychologies"
-          :key="psychology.category"
-          :category="psychology.category"
-          :font-awesome-icon="psychology.fontAwesomeIcon"
-          :link-to="psychology.linkTo"
-        )
-        div.psychologies--category.applied-psychology
-          router-link(to="applied-psycholody")
-            |
-    bottom-navigation
+      app-psychology-link(
+        v-for="psychology in psychologies"
+        :key="psychology.category"
+        :category="psychology.category"
+        :font-awesome-icon="psychology.fontAwesomeIcon"
+        :link-to="psychology.linkTo"
+      )
+    app-bottom-navigation
 </template>
 
 <script>
 import axios from 'axios'
-import BottomNavigation from '@/components/BottomNavigation'
-import PsychologyLink from '@/components/PsychologyLink'
+import AppBottomNavigation from '@/components/AppBottomNavigation'
+import AppPsychologyLink from '@/components/AppPsychologyLink'
+import AppSectionTitle from '@/components/AppSectionTitle'
 
 export default{
   name: 'HomeAfterSignedIn',
   components: {
-    BottomNavigation,
-    PsychologyLink
+    AppBottomNavigation,
+    AppPsychologyLink,
+    AppSectionTitle
   },
   data() {
     return {
@@ -133,7 +131,7 @@ export default{
 <style lang="scss" scoped>
 .signed-home {
   &--container {
-    padding: 12% 10%
+    padding: 10px 8% 60px;
   }
 }
 </style>

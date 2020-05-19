@@ -1,13 +1,13 @@
 <template lang="pug">
   div.signin
+    app-section-title(section-title="Signin")
     div.signin--container
-      session-form-title(session-title="Signin")
       b-form(@submit.prevent="signin")
         b-form-group(label="Eメール" label-for="email")
           b-form-input#email(v-model="email" type="text")
         b-form-group(label="パスワード" label-for="password")
           b-form-input#password(v-model="password" type="text")
-        base-submit-button(button-message="ログイン")
+        app-submit-button(button-message="ログイン")
         div.to-signup.text-right
           router-link(to="/signup")
             | 登録が済んでいない方はこちら
@@ -15,14 +15,14 @@
 
 <script>
 import axios from 'axios'
-import SessionFormTitle from '@/components/SessionFormTitle'
-import BaseSubmitButton from '@/components/BaseSubmitButton'
+import AppSectionTitle from '@/components/AppSectionTitle'
+import AppSubmitButton from '@/components/AppSubmitButton'
 
 export default {
   name: 'Signin',
   components: {
-    SessionFormTitle,
-    BaseSubmitButton
+    AppSectionTitle,
+    AppSubmitButton
   },
   data () {
     return {
@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 .signin {
   &--container {
-    padding: 10px;
+    padding: 10px 10% 60px;
   }
 }
 

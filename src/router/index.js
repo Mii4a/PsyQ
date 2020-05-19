@@ -1,6 +1,7 @@
 import About from '@/views/About.vue'
 import Home from '@/views/Home.vue'
 import HomeAfterSignedIn from '@/views/HomeAfterSignedIn.vue'
+import PsychologyIndex from '@/views/PsychologyIndex.vue'
 import Signin from '@/views/Signin.vue'
 import Signup from '@/views/Signup.vue'
 import WorkbookShow from '@/views/WorkbookShow.vue'
@@ -37,12 +38,14 @@ const routes = [{
     component: HomeAfterSignedIn
   },
   {
-    path: 'workbook/:id',
+    path: '/workbook/:id',
     name: 'WorkbookShow',
     component: WorkbookShow
   },
   {
-    path: ''
+    path: '/psychology-index',
+    name: 'PsychologyIndex',
+    component: PsychologyIndex
   }
 ]
 

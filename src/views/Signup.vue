@@ -1,7 +1,7 @@
 <template lang="pug">
   div.signup
+    app-section-title(section-title="Signup")
     div.signup--container
-      session-form-title(session-title="Signup")
       b-form(@submit.prevent="postUser")
         b-form-group(label="ユーザー名:" label-for="name")
           b-form-input#name(v-model="user.name" type="text" required)
@@ -12,19 +12,19 @@
         b-form-group(label="パスワード(確認):" label-for="password_confirmation")
           b-form-input#password_confirmation(v-model="user.passwordConfirmation"
           type="text" required)
-        base-submit-button(button-message="登録する")
+        app-submit-button(button-message="登録する")
 
 
 </template>
 <script>
-import SessionFormTitle from '@/components/SessionFormTitle'
-import BaseSubmitButton from '@/components/BaseSubmitButton'
+import AppSectionTitle from '@/components/AppSectionTitle'
+import AppSubmitButton from '@/components/AppSubmitButton'
 
 export default {
   name: 'Signup',
   components: {
-    SessionFormTitle,
-    BaseSubmitButton
+    AppSectionTitle,
+    AppSubmitButton
   },
   data() {
     return {
@@ -80,7 +80,7 @@ export default {
 <style lang="scss" scoped>
 .signup {
   &--container {
-    padding: 10px;
+    padding: 10px 10% 60px;
   }
 }
 
