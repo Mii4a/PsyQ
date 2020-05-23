@@ -33,13 +33,14 @@ export default{
       display: inline-block;
       font-size: 1.6rem;
       font-weight: bold;
-      width: 130%;
+      padding:0 15px;
+      width: auto;
     }
     &__linear {
       background-color: #22bbaa;
       height: 2px;
       position: relative;
-      top: 18px;
+      top: 17px;
       width: 100%;
     }
   }

@@ -1,14 +1,15 @@
 <template lang="pug">
   div.psychology-link
-    router-link(:to="'/psychology-index'")
+    router-link(
+      :to="{path: `${linkTo}`, query: { category: `${query}` }}")
       div.psychology-link--container.d-flex
         div.psychology-link--container__left
-          div.psychology-icon(:class="`background-color--${color}`")
+          div.psychology-icon
             font-awesome-icon(:icon="[`fas`,fontAwesomeIcon]")
         div.psychology-link--container__right
           div.psychology-category
             span
-              | {{ category + '心理学' }}
+              | {{ japaneseFieldName + '心理学' }}
 </template>
 
 <script>
@@ -16,13 +17,17 @@
 export default {
   name: "AppPsychologyLink",
   props: {
-    category: {
+    query: {
       type: String,
       required: true
     },
     count: {
       type: String,
       default: '1'
+    },
+    japaneseFieldName: {
+      type: String,
+      required: true
     },
     fontAwesomeIcon: {
       type: String,

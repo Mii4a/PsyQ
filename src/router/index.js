@@ -43,7 +43,7 @@ const routes = [{
     component: WorkbookShow
   },
   {
-    path: '/psychology-index',
+    path: '/psychologies',
     name: 'PsychologyIndex',
     component: PsychologyIndex
   }

@@ -55,7 +55,7 @@ var routes = [{
   name: 'WorkbookShow',
   component: _WorkbookShow["default"]
 }, {
-  path: '/psychology-index',
+  path: '/psychologies',
   name: 'PsychologyIndex',
   component: _PsychologyIndex["default"]
 }];

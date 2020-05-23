@@ -4,10 +4,11 @@
     div.signed-home--container
       app-psychology-link(
         v-for="psychology in psychologies"
-        :key="psychology.category"
-        :category="psychology.category"
+        :key="psychology.field"
+        :query="psychology.category"
+        :japanese-field-name="psychology.field"
         :font-awesome-icon="psychology.fontAwesomeIcon"
-        :link-to="psychology.linkTo"
+        link-to="/psychologies"
       )
     app-bottom-navigation
 </template>
@@ -30,14 +31,16 @@ export default{
       error: '',
       psychologies: [
         {
-          category: '基礎',
+          category: 'basic',
+          field: '基礎',
           fontAwesomeIcon: 'graduation-cap',
           linkTo: '/basic-psychology'
         },
         {
-          category: '応用',
-          fontAwesomeIcon: 'hand-holding-heart',
-          linkTo: '/aplied-psychology'
+          category: 'applied',
+          field: '応用',
+          fontAwesomeIcon: 'users',
+          linkTo: '/applied-psychology'
         }
       ]
     }
