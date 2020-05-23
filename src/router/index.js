@@ -2,6 +2,7 @@ import About from '@/views/About.vue'
 import Home from '@/views/Home.vue'
 import HomeAfterSignedIn from '@/views/HomeAfterSignedIn.vue'
 import PsychologyIndex from '@/views/PsychologyIndex.vue'
+import PsychologyShow from '@/views/PsychologyShow.vue'
 import Signin from '@/views/Signin.vue'
 import Signup from '@/views/Signup.vue'
 import WorkbookShow from '@/views/WorkbookShow.vue'
@@ -46,6 +47,11 @@ const routes = [{
     path: '/psychologies',
     name: 'PsychologyIndex',
     component: PsychologyIndex
+  },
+  {
+    path: '/psychologies/:id',
+    name: 'psychologyShow',
+    component: PsychologyShow
   }
 ]
 

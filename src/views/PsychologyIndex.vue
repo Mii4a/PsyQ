@@ -4,11 +4,11 @@
     div.psychology-index--container
       app-psychology-link(
         v-for="psychology in psychologies"
-        :key="psychology.field"
+        :key="psychology.id"
         :query="psychology.field"
         :japanese-field-name="psychology.japanese_field_name"
         :font-awesome-icon="psychology.font_awesome_icon"
-        link-to="/workbooks"
+        :link-to="'/psychologies/' + `${psychology.id}`"
       )
     app-bottom-navigation
 </template>
@@ -35,12 +35,8 @@ export default {
       const field = this.$route.query.category
       const route = field + '_psychologies'
       const gettingUrl = process.env.VUE_APP_API + route
-      const params = {
-        category: field,
-      }
       this.$http.secured.get(
-        gettingUrl,
-        params
+        gettingUrl
         ).then(
           response => this.psychologies = response.data
         ).catch(
