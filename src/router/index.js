@@ -52,6 +52,14 @@ const routes = [{
     path: '/psychologies/:id',
     name: 'psychologyShow',
     component: PsychologyShow
+  },
+  {
+    path: 'workbooks/:id',
+    name: 'workbookShow',
+    component: WorkbookShow,
+    children: [{
+      path: 'questions'
+    }]
   }
 ]
 

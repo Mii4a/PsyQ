@@ -28,14 +28,14 @@ export default {
   },
   data () {
     return {
-      id: this.$route.params['id'],
       psychology: [],
       workbooks: []
     }
   },
   methods: {
-    getWorkbooks () {
-      const gettingUrl = process.env.VUE_APP_API + '/psychologies/' + this.id
+    getPsychologyAndWorkbooks () {
+      const psychologyId = this.$route.params['id']
+      const gettingUrl = process.env.VUE_APP_API + '/psychologies/' + psychologyId
       this.$http.secured.get(
         gettingUrl
         ).then(
@@ -52,7 +52,7 @@ export default {
     },
   },
   created () {
-    this.getWorkbooks()
+    this.getPsychologyAndWorkbooks()
   }
 }
 </script>
