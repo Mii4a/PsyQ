@@ -5,7 +5,9 @@
       div.psychology-link--container.d-flex
         div.psychology-link--container__left
           div.psychology-icon
-            font-awesome-icon(:icon="[`fas`,fontAwesomeIcon]")
+            font-awesome-icon(
+              :icon="[`fas`,fontAwesomeIcon]"
+              )
         div.psychology-link--container__right
           div.psychology-category
             span

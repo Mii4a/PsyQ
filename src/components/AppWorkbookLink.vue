@@ -7,6 +7,10 @@
         div.workbook-name
           span
             | {{ subjectName }}
+          span.next
+            font-awesome-icon(
+              icon="arrow-right"
+              )
         div.workbook-information
           span.workbook-information--questions-count
             | {{ "問題数 " + questionsCount }}
@@ -34,10 +38,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.next {
+  float: right;
+  font-size: .8rem;
+  padding-top: 3px;
+}
 .workbook-name {
   color: #777;
   font-size: 1.2rem;
   padding: 5px 10px 0;
+  text-decoration: none;
 }
 .workbook-information {
   background-color: #11aa99;
@@ -46,11 +56,16 @@ export default {
   color: #fff;
   font-size: .8rem;
   padding: 0 10px;
+  text-decoration: none;
 }
 .workbook-link {
   height: 60px;
   margin-bottom: 10px;
+  transition: ease .1s;
   width: 100%;
+  &:hover {
+    transform: scale(1.1);
+  }
   &--container {
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 10px;
