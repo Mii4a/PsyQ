@@ -62,9 +62,10 @@ export default {
   margin-bottom: 15px;
   width: 100%;
   &--container {
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .3);
     padding: 10px 15px;
-    border: 1px solid rgba(34, 176, 110, .1);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     &__left {
       width: 30%;
     }

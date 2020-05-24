@@ -1,20 +1,30 @@
 <template lang="pug">
   div.psychology-show
-    app-section-title(section-title="Workbooks")
+    app-section-title(
+      section-title="Workbooks"
+      )
     div.psychology-show--container
+      app-workbook-link(
+        v-for="workbook in workbooks"
+        :id="workbook.id"
+        :subject-name="workbook.subject_name"
+        :questions-count="workbook.questions_count"
+      )
     app-bottom-navigation
 </template>
 
 <script>
 import AppBottomNavigation from '@/components/AppBottomNavigation'
 import AppSectionTitle from '@/components/AppSectionTitle'
+import AppWorkbookLink from '@/components/AppWorkbookLink'
 
 
 export default {
   name: "PsychologyShow",
   components: {
     AppBottomNavigation,
-    AppSectionTitle
+    AppSectionTitle,
+    AppWorkbookLink
   },
   data () {
     return {
