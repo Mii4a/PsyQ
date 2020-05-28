@@ -65,11 +65,11 @@ var routes = [{
   name: 'psychologyShow',
   component: _PsychologyShow["default"]
 }, {
-  path: 'workbooks/:id',
+  path: '/workbooks/:id',
   name: 'workbookShow',
   component: _WorkbookShow["default"],
   children: [{
-    path: 'questions'
+    path: '/questions'
   }]
 }];
 var router = new _vueRouter["default"]({

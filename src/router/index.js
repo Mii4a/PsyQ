@@ -54,11 +54,11 @@ const routes = [{
     component: PsychologyShow
   },
   {
-    path: 'workbooks/:id',
+    path: '/workbooks/:id',
     name: 'workbookShow',
     component: WorkbookShow,
     children: [{
-      path: 'questions'
+      path: '/questions'
     }]
   }
 ]

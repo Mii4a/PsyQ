@@ -1,11 +1,12 @@
 <template lang="pug">
   div.psychology-show
     app-section-title(
-      section-title="Workbooks"
+      section-title="Selects"
       )
     div.psychology-show--container
       app-workbook-link(
         v-for="workbook in workbooks"
+        :key="workbook.id"
         :id="workbook.id"
         :subject-name="workbook.subject_name"
         :questions-count="workbook.questions_count"
@@ -17,7 +18,6 @@
 import AppBottomNavigation from '@/components/AppBottomNavigation'
 import AppSectionTitle from '@/components/AppSectionTitle'
 import AppWorkbookLink from '@/components/AppWorkbookLink'
-
 
 export default {
   name: "PsychologyShow",
