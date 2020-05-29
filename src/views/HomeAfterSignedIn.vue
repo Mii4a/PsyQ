@@ -110,10 +110,12 @@ export default{
           subject_explanation: this.subjectExplanation,
           subject_image: this.subjectImage
         }
-      }).then(response => {
+      }).then((response) => {
         this.info = response
         this.$router.replace('/workbooks')
-      }).catch(error => setError(error))
+      }).catch(
+        error => setError(error)
+        )
     },
     checkSignedIn() {
       if (!localStorage.signedIn) {

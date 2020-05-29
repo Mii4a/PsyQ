@@ -15,6 +15,8 @@ var _PsychologyIndex = _interopRequireDefault(require("@/views/PsychologyIndex.v
 
 var _PsychologyShow = _interopRequireDefault(require("@/views/PsychologyShow.vue"));
 
+var _Questions = _interopRequireDefault(require("@/views/Questions.vue"));
+
 var _Signin = _interopRequireDefault(require("@/views/Signin.vue"));
 
 var _Signup = _interopRequireDefault(require("@/views/Signup.vue"));
@@ -67,10 +69,11 @@ var routes = [{
 }, {
   path: '/workbooks/:id',
   name: 'workbookShow',
-  component: _WorkbookShow["default"],
-  children: [{
-    path: '/questions'
-  }]
+  component: _WorkbookShow["default"]
+}, {
+  path: '/questions',
+  name: 'questions',
+  component: _Questions["default"]
 }];
 var router = new _vueRouter["default"]({
   mode: 'history',
