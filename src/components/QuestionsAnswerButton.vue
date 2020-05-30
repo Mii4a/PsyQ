@@ -26,7 +26,8 @@ export default {
 <style lang="scss" scoped>
 .answer-button {
   &--container {
-    border-top: 2px solid #555;
+    background-color: #fff;
+    border-top: 2px solid #22bbaa;
     font-size: 1.1rem;
     padding: 10px 20px;
     &__number {
