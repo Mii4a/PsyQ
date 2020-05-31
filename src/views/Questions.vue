@@ -1,16 +1,18 @@
 <template lang="pug">
   div.questions
-    app-section-title(:section-title="restOfLimitTime")
+    questions-header(
+      :currentQuestionNumber="currentQuestionNumber"
+      :limit-time="restOfLimitTime"
+      :totalQuestionNumber="totalQuestionNumber"
+    )
     div.questions--container
-      questions-correct-answer(
-        v-if="showCorrectAnswer"
-        :is-answer="isAnswer"
-        :correct-answer="correctAnswer"
-      )
-      p.questions--container__number
-        | {{ 'No.' + questionNumber }}
-      span.questions--container__explanation
+      p.questions--container__explanation
         | {{ showExplanation }}
+    questions-answer(
+        v-if="showCorrectAnswer"
+        :correct-answer="correctAnswer"
+        :is-answer="isAnswer"
+      )
     div.answer-form
       questions-answer-button(
         v-for="(choice, index) in choices"
@@ -19,21 +21,19 @@
         :number="answerNumber[index]"
         @click.native="checkAnswer(choice.is_answer)"
       )
-
-
 </template>
 
 <script>
-import AppSectionTitle from '@/components/AppSectionTitle'
+import QuestionsHeader from '@/components/QuestionsHeader'
 import QuestionsAnswerButton from '@/components/QuestionsAnswerButton'
-import QuestionsCorrectAnswer from '@/components/QuestionsCorrectAnswer'
+import QuestionsAnswer from '@/components/QuestionsAnswer'
 
 export default {
   name: "questions",
   components: {
-    AppSectionTitle,
     QuestionsAnswerButton,
-    QuestionsCorrectAnswer
+    QuestionsAnswer,
+    QuestionsHeader
   },
   data () {
     return {
@@ -42,6 +42,7 @@ export default {
       choices: [],
       correctAnswer: "",
       currentQuestion: [],
+      currentQuestionNumber: 1,
       error: "",
       explanation: [],
       explanationObj: null,
@@ -49,10 +50,9 @@ export default {
       limitTime: 60,
       limitTimeObj: null,
       questions: [],
-      questionNumber: 1,
       showCorrectAnswer: false,
       splidExplanation: [],
-      totalQuizNumber: 0,
+      totalQuestionNumber: 0,
     }
   },
   computed: {
@@ -71,14 +71,17 @@ export default {
   },
   created () {
     this.getQuestionsFromWorkbooks()
+  },
+  mounted () {
     this.addExplanation()
     this.decreaseLimitTime()
   },
   methods: {
-    async addExplanation () {
+    addExplanation () {
       let n = 0
       this.explanationObj = setInterval(() => {
         if (n <= this.splidExplanation.length) {
+          console.log(n)
           this.explanation.push(this.splidExplanation[n])
           n++
         } else {
@@ -86,17 +89,11 @@ export default {
         }}, 100);
     },
     checkAnswer (choiceAnswer) {
-      if (choiceAnswer) {
-        this.showCorrectAnswer = true
-        this.isAnswer = true
-        this.stopExplanation()
-        clearInterval(this.limitTimeObj)
-      } else {
-        this.showCorrectAnswer = true
-        this.isAnswer = false
-        this.stopExplanation()
-        clearInterval(this.limitTimeObj)
-      }
+      this.showCorrectAnswer = true
+      choiceAnswer ? this.isAnswer = true  : this.isAnswer = false
+      this.stopExplanation()
+      clearInterval(this.limitTimeObj)
+      this.nextQuestion()
     },
     decreaseLimitTime () {
       this.limitTimeObj = setInterval(() => {
@@ -108,10 +105,20 @@ export default {
         }
       }, 1000)
     },
-    getChoices (currentQuestionId) {
+    getChoices () {
       const answers = this.answers
+      const currentQuestionId = this.currentQuestion.id
       const choices = answers.filter(answer => answer.question_id === currentQuestionId)
       this.choices = this.shuffleArray(choices)
+    },
+    setCurrentQuestion () {
+      this.currentQuestion = this.questions[this.currentQuestionNumber - 1]
+      this.explanation = []
+      this.limitTime = 60
+      this.showCorrectAnswer = false
+      this.splidExplanation = this.currentQuestion.explanation.split('')
+      this.getChoices()
+      this.correctAnswer = this.choices.find(el => el.is_answer === true).option
     },
     async getQuestionsFromWorkbooks () {
       const workbookId = this.$route.query.workbook
@@ -120,12 +127,20 @@ export default {
         const questions = response.data.questions
         this.answers = response.data.answers
         this.questions = this.shuffleArray(questions)
-        this.totalQuizNumber = this.questions.length
-        this.currentQuestion = this.questions[this.questionNumber - 1]
-        this.splidExplanation = this.currentQuestion.explanation.split('')
-        this.getChoices(this.currentQuestion.id)
-        this.correctAnswer = this.choices.find(el => el.is_answer === true).option
+        this.totalQuestionNumber = this.questions.length
+        this.setCurrentQuestion()
       }).catch(error => setError(error))
+    },
+    nextQuestion () {
+      setTimeout(() => {
+        if (this.currentQuestionNumber <= this.totalQuestionNumber) {
+          this.currentQuestionNumber++
+          this.setCurrentQuestion()
+          this.addExplanation()
+        } else {
+          this.$router.replace('')
+        }
+      }, 5000)
     },
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
@@ -149,21 +164,22 @@ export default {
 
 <style lang="scss" scoped>
 .answer-form {
-  background-color: #22aabb;
-  bottom: 0;
   padding-bottom: 2px;
   width: 100%;
 }
 
 .questions {
   &--container {
-    background-color: #cfffcf;
-    height: 140px;
-    margin-bottom: 10px;
-    padding: 10px 8%;
+    &__explanation {
+      background-color: rgba(0, 0, 0, .1);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      min-height: 100px;
+      padding: 10px 8%;
+    }
     &__number {
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       text-align: center;
     }
   }
