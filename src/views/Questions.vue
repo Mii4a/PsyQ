@@ -11,7 +11,10 @@
     questions-answer(
         v-if="showCorrectAnswer"
         :correct-answer="correctAnswer"
+        :current-question-number="currentQuestionNumber"
         :is-answer="isAnswer"
+        :next-time="nextTime"
+        :total-question-number="totalQuestionNumber"
       )
     div.answer-form
       questions-answer-button(
@@ -41,14 +44,17 @@ export default {
       answerNumber: ["A", "B", "C"],
       choices: [],
       correctAnswer: "",
+      correctAnswerCount: 0,
       currentQuestion: [],
       currentQuestionNumber: 1,
       error: "",
       explanation: [],
       explanationObj: null,
-      isAnswer: "",
-      limitTime: 60,
+      isAnswer: false,
+      limitTime: 30,
       limitTimeObj: null,
+      nextTime: 5,
+      nextTimeObj: null,
       questions: [],
       showCorrectAnswer: false,
       splidExplanation: [],
@@ -72,10 +78,6 @@ export default {
   created () {
     this.getQuestionsFromWorkbooks()
   },
-  mounted () {
-    this.addExplanation()
-    this.decreaseLimitTime()
-  },
   methods: {
     addExplanation () {
       let n = 0
@@ -89,11 +91,18 @@ export default {
         }}, 100);
     },
     checkAnswer (choiceAnswer) {
-      this.showCorrectAnswer = true
-      choiceAnswer ? this.isAnswer = true  : this.isAnswer = false
-      this.stopExplanation()
-      clearInterval(this.limitTimeObj)
-      this.nextQuestion()
+      if (!this.showCorrectAnswer) {
+        if (choiceAnswer) {
+          this.isAnswer = true
+          this.correctAnswerCount++
+        } else {
+          this.isAnswer = false
+        }
+        this.showCorrectAnswer = true
+        this.showEntireExplanation()
+        clearInterval(this.limitTimeObj)
+        this.countUntilNextQuestion()
+      }
     },
     decreaseLimitTime () {
       this.limitTimeObj = setInterval(() => {
@@ -102,23 +111,26 @@ export default {
         } else {
           clearInterval(this.limitTimeObj)
           this.showCorrectAnswer = true
+          this.isAnswer = false
+          this.countUntilNextQuestion()
         }
       }, 1000)
+    },
+    countUntilNextQuestion () {
+      this.nextTimeObj = setInterval(() => {
+        if (this.nextTime > 0) {
+          this.nextTime--
+        } else {
+          clearInterval(this.nextTimeObj)
+          this.nextQuestion()
+        }
+      }, 1000);
     },
     getChoices () {
       const answers = this.answers
       const currentQuestionId = this.currentQuestion.id
       const choices = answers.filter(answer => answer.question_id === currentQuestionId)
       this.choices = this.shuffleArray(choices)
-    },
-    setCurrentQuestion () {
-      this.currentQuestion = this.questions[this.currentQuestionNumber - 1]
-      this.explanation = []
-      this.limitTime = 60
-      this.showCorrectAnswer = false
-      this.splidExplanation = this.currentQuestion.explanation.split('')
-      this.getChoices()
-      this.correctAnswer = this.choices.find(el => el.is_answer === true).option
     },
     async getQuestionsFromWorkbooks () {
       const workbookId = this.$route.query.workbook
@@ -132,18 +144,32 @@ export default {
       }).catch(error => setError(error))
     },
     nextQuestion () {
-      setTimeout(() => {
-        if (this.currentQuestionNumber <= this.totalQuestionNumber) {
-          this.currentQuestionNumber++
-          this.setCurrentQuestion()
-          this.addExplanation()
-        } else {
-          this.$router.replace('')
-        }
-      }, 5000)
+      if (this.currentQuestionNumber < this.totalQuestionNumber) {
+        this.currentQuestionNumber++
+        this.setCurrentQuestion()
+      } else {
+        this.$router.push({
+          path: '/questions-result',
+          query: {
+            totalQuestionNumber: this.totalQuestionNumber,
+            correctAnswerCount: this.correctAnswerCount
+        }})
+      }
     },
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
+    },
+    setCurrentQuestion () {
+      this.currentQuestion = this.questions[this.currentQuestionNumber - 1]
+      this.explanation = []
+      this.limitTime = 30
+      this.nextTime = 5
+      this.showCorrectAnswer = false
+      this.splidExplanation = this.currentQuestion.explanation.split('')
+      this.getChoices()
+      this.correctAnswer = this.choices.find(el => el.is_answer === true).option
+      this.addExplanation()
+      this.decreaseLimitTime()
     },
     shuffleArray ([...array]) {
       for (let i = array.length - 1; i >= 0; i--) {
@@ -154,7 +180,7 @@ export default {
       }
       return array
     },
-    stopExplanation () {
+    showEntireExplanation () {
       clearInterval(this.explanationObj)
       this.explanation = this.currentQuestion.explanation.split('')
     }

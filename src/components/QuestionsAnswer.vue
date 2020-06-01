@@ -12,6 +12,8 @@ div.answer
           )
       span.result--message
         | {{ messageCorrectOrWrong }}
+      span.next-time
+        | {{ nextTimeMessage + nextTime }}
     div.correct-answer
       | {{ '答え：' + correctAnswer }}
 </template>
@@ -24,21 +26,29 @@ export default {
       type: String,
       requierd: true
     },
+    currentQuestionNumber: {
+      type: Number,
+      required: true
+    },
     isAnswer: {
       type: Boolean,
       required: true,
       default: false
+    },
+    nextTime: {
+      type: Number,
+      required: true,
+      default: 5
+    },
+    totalQuestionNumber: {
+      type: Number,
+      required: true,
     }
   },
   computed: {
     answerIcon () {
-      if (this.isAnswer) {
-        const correctAnswerIcon = 'check-circle'
-        return correctAnswerIcon
-      } else {
-        const wrongAnswerIcon = 'times-circle'
-        return wrongAnswerIcon
-      }
+      const answerIcon = (this.isAnswer) ? 'check-circle' : 'times-circle'
+      return answerIcon
     },
     messageCorrectOrWrong () {
       if (this.isAnswer) {
@@ -48,6 +58,16 @@ export default {
         const wrongAnswerMessage = '不正解'
         return wrongAnswerMessage
       }
+    },
+    nextTimeMessage () {
+      const currentNumber = this.currentQuestionNumber
+      const lastNumber = this.totalQuestionNumber
+      const nextTimeMessage = (
+        (currentNumber === lastNumber)
+        ? 'リザルト画面まで\n'
+        : '次の問題まで\n'
+      )
+      return nextTimeMessage
     }
   }
 }
@@ -81,6 +101,12 @@ export default {
   }
   &--message {
     font-size: 1rem;
+    margin-right: 10px;
+  }
+  .next-time {
+    color: #8a8a8a;
+    font-size: .8rem;
+    font-weight: normal;
   }
 }
 
