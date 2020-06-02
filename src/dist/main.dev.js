@@ -16,6 +16,8 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vueAxios = _interopRequireDefault(require("vue-axios"));
 
+var _vuexRouterSync = require("vuex-router-sync");
+
 var _App = _interopRequireDefault(require("./App.vue"));
 
 var _axios = require("./axios");
@@ -29,6 +31,8 @@ var _store = _interopRequireDefault(require("./store"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _fontawesomeSvgCore.library.add(_freeSolidSvgIcons.fas);
+
+(0, _vuexRouterSync.sync)(_store["default"], _router["default"]);
 
 _vue["default"].use(_vueAxios["default"], {
   secured: _axios.securedAxiosInstance,

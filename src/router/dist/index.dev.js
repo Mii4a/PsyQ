@@ -17,6 +17,8 @@ var _PsychologyShow = _interopRequireDefault(require("@/views/PsychologyShow.vue
 
 var _Questions = _interopRequireDefault(require("@/views/Questions.vue"));
 
+var _Result = _interopRequireDefault(require("@/views/Result.vue"));
+
 var _Signin = _interopRequireDefault(require("@/views/Signin.vue"));
 
 var _Signup = _interopRequireDefault(require("@/views/Signup.vue"));
@@ -67,13 +69,17 @@ var routes = [{
   name: 'psychologyShow',
   component: _PsychologyShow["default"]
 }, {
-  path: '/workbooks/:id',
-  name: 'workbookShow',
-  component: _WorkbookShow["default"]
-}, {
   path: '/questions',
   name: 'questions',
   component: _Questions["default"]
+}, {
+  path: '/result',
+  name: 'result',
+  component: _Result["default"]
+}, {
+  path: '/workbooks/:id',
+  name: 'workbookShow',
+  component: _WorkbookShow["default"]
 }];
 var router = new _vueRouter["default"]({
   mode: 'history',

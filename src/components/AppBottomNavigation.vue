@@ -2,14 +2,14 @@
   div.bottom-nav.d-flex
     div.bottom-nav--button
       router-link.bottom-nav--button__link(
-        to="/home"
+        :to="{ path: $store.state.route.from.fullPath }"
         )
-        b-icon-house.bottom-nav--button__icon
-    div.bottom-nav--button
+        b-icon-box-arrow-in-left.bottom-nav--button__icon
+    div.bottom-nav--button.center-button
       router-link.bottom-nav--button__link(
         to="/home"
         )
-        b-icon-person.bottom-nav--button__icon
+        b-icon-house.bottom-nav--button__icon.center-button--icon
     div.bottom-nav--button.toggle-button(
       v-b-toggle.sidebar-right
       )

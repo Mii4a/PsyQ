@@ -30,6 +30,9 @@ export default {
       psychologies: []
     }
   },
+  mounted () {
+    this.getPsychologies()
+  },
   methods: {
     getPsychologies () {
       const field = this.$route.query.category
@@ -46,9 +49,6 @@ export default {
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
-  },
-  mounted () {
-    this.getPsychologies()
   },
 }
 </script>

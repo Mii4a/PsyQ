@@ -59,6 +59,7 @@ export default {
       showCorrectAnswer: false,
       splidExplanation: [],
       totalQuestionNumber: 0,
+      workbook: []
     }
   },
   computed: {
@@ -138,6 +139,7 @@ export default {
       await this.$http.secured.get(gettingUrl).then((response) => {
         const questions = response.data.questions
         this.answers = response.data.answers
+        this.workbook = response.data.workbook
         this.questions = this.shuffleArray(questions)
         this.totalQuestionNumber = this.questions.length
         this.setCurrentQuestion()
@@ -149,10 +151,11 @@ export default {
         this.setCurrentQuestion()
       } else {
         this.$router.push({
-          path: '/questions-result',
+          path: '/result',
           query: {
+            correctAnswerCount: this.correctAnswerCount,
             totalQuestionNumber: this.totalQuestionNumber,
-            correctAnswerCount: this.correctAnswerCount
+            psychologyId: this.workbook.psychology_id
         }})
       }
     },
