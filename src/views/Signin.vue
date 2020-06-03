@@ -2,6 +2,11 @@
   div.signin
     app-section-title(section-title="Signin")
     div.signin--container
+      b-alert(
+        :show="expired"
+        variant="warning"
+      )
+        | ログインして下さい
       b-form(@submit.prevent="signin")
         b-form-group(label="Eメール" label-for="email")
           b-form-input#email(v-model="email" type="text")
@@ -28,10 +33,11 @@ export default {
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      expired: null
     }
   },
-  created () {
+  mounted () {
     this.checkSignedIn()
   },
   updated () {
@@ -68,8 +74,13 @@ export default {
       delete localStorage.signedIn
     },
     checkSignedIn () {
-      if (localStorage.signedIn) {
-        this.$router.replace('/workbooks')
+      const signedIn = localStorage.signedIn
+      const expired = this.$route.query.expired
+      if (signedIn) {
+        this.$router.replace('/home')
+      }
+      if (expired) {
+        this.expired = true
       }
     }
   }

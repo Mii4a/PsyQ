@@ -32,7 +32,23 @@ export default {
       workbooks: []
     }
   },
+  mounted() {
+    this.checkSignedIn()
+  },
+  updated() {
+    this.checkSignedIn()
+  },
   methods: {
+    checkSignedIn() {
+      if (!localStorage.signedIn) {
+        this.$router.replace({
+          path: '/signin',
+          query: {
+            expired: true
+          }
+        })
+      }
+    },
     getPsychologyAndWorkbooks () {
       const psychologyId = this.$route.params['id']
       const gettingUrl = process.env.VUE_APP_API + '/psychologies/' + psychologyId

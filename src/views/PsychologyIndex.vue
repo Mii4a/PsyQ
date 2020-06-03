@@ -31,9 +31,23 @@ export default {
     }
   },
   mounted () {
+    this.checkSignedIn()
     this.getPsychologies()
   },
+  updated() {
+    this.checkSignedIn()
+  },
   methods: {
+    checkSignedIn() {
+      if (!localStorage.signedIn) {
+        this.$router.replace({
+          path: '/signin',
+          query: {
+            expired: true
+          }
+        })
+      }
+    },
     getPsychologies () {
       const field = this.$route.query.category
       const route = field + '_psychologies'

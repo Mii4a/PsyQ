@@ -76,8 +76,12 @@ export default {
       return quizNumber
     }
   },
-  created () {
+  mounted() {
     this.getQuestionsFromWorkbooks()
+    this.checkSignedIn()
+  },
+  updated() {
+    this.checkSignedIn()
   },
   methods: {
     addExplanation () {
@@ -103,6 +107,16 @@ export default {
         this.showEntireExplanation()
         clearInterval(this.limitTimeObj)
         this.countUntilNextQuestion()
+      }
+    },
+    checkSignedIn() {
+      if (!localStorage.signedIn) {
+        this.$router.replace({
+          path: '/signin',
+          query: {
+            expired: true
+          }
+        })
       }
     },
     decreaseLimitTime () {

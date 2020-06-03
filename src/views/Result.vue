@@ -35,10 +35,24 @@ export default {
       psychologyId: ""
     }
   },
-  mounted () {
+  mounted() {
+    this.checkSignedIn()
     this.getParams()
   },
+  updated() {
+    this.checkSignedIn()
+  },
   methods: {
+    checkSignedIn() {
+      if (!localStorage.signedIn) {
+        this.$router.replace({
+          path: '/signin',
+          query: {
+            expired: true
+          }
+        })
+      }
+    },
     getParams () {
       this.correctAnswerCount = this.$route.query.totalQuestionNumber
       this.psychologyId = this.$route.query.psychologyId
