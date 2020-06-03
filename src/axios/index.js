@@ -19,6 +19,7 @@ const plainAxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
+    "Access-Control-Allow-Origin": "*",
     'Authorization': 'Token ' + process.env.VUE_APP_API_TOKEN
   }
 })
