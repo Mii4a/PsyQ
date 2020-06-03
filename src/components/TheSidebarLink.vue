@@ -21,6 +21,7 @@ export default {
   props: {
     query: {
       type: String,
+      default: ''
     },
     count: {
       type: String,

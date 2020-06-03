@@ -10,7 +10,7 @@ div.questions-header
 
 <script>
 export default {
-  name: "questionsHeader",
+  name: "QuestionsHeader",
   props: {
     currentQuestionNumber: {
       type: Number,

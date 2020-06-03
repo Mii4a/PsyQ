@@ -38,6 +38,9 @@ export default {
   updated() {
     this.checkSignedIn()
   },
+  created () {
+    this.getPsychologyAndWorkbooks()
+  },
   methods: {
     checkSignedIn() {
       if (!localStorage.signedIn) {
@@ -66,9 +69,6 @@ export default {
     setError(error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
-  },
-  created () {
-    this.getPsychologyAndWorkbooks()
   }
 }
 </script>

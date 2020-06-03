@@ -32,7 +32,7 @@ import QuestionsAnswerButton from '@/components/QuestionsAnswerButton'
 import QuestionsAnswer from '@/components/QuestionsAnswer'
 
 export default {
-  name: "questions",
+  name: "Questions",
   components: {
     QuestionsAnswerButton,
     QuestionsAnswer,

@@ -17,9 +17,6 @@
 export default {
   name: "TheSidebarLogoutLink",
   props: {
-    query: {
-      type: String,
-    },
     linkName: {
       type: String,
       default: 'ログアウト'

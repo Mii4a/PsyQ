@@ -24,18 +24,18 @@ import axios from 'axios'
 
 export default {
   name: 'Home',
+  mounted() {
+    this.checkSignedIn()
+  },
+  updated() {
+    this.checkSignedIn()
+  },
   methods: {
     checkSignedIn() {
       if (localStorage.signedIn) {
         this.$router.replace('/home')
       }
     }
-  },
-  mounted() {
-    this.checkSignedIn()
-  },
-  updated() {
-    this.checkSignedIn()
   }
 }
 </script>

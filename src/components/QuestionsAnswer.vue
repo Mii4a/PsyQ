@@ -24,11 +24,13 @@ export default {
   props: {
     correctAnswer: {
       type: String,
-      requierd: true
+      requierd: true,
+      default: '答え'
     },
     currentQuestionNumber: {
       type: Number,
-      required: true
+      required: true,
+      default: 1
     },
     isAnswer: {
       type: Boolean,
