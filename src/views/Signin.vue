@@ -53,7 +53,7 @@ export default {
     signin () {
       const headers = {
         'Content-Type': 'application/json',
-        'Authorization' : 'Bearer ' + process.env.VUE_APP_API_TOKEN
+        'Authorization' : 'Token ' + process.env.VUE_APP_API_TOKEN
       }
       this.$http.plain.post(process.env.VUE_APP_API + 'login', {
         email: this.email,
