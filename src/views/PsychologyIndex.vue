@@ -27,6 +27,8 @@ export default {
   },
   data () {
     return {
+      error: "",
+      errorObj: null,
       psychologies: []
     }
   },
@@ -57,10 +59,11 @@ export default {
         ).then(
           response => this.psychologies = response.data
         ).catch(
-          error => setError(error)
+          error => this.setError(error)
         )
     },
     setError(error, text) {
+      this.errorObj = true
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
   },

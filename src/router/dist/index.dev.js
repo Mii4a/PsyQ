@@ -11,6 +11,8 @@ var _Home = _interopRequireDefault(require("@/views/Home.vue"));
 
 var _HomeAfterSignedIn = _interopRequireDefault(require("@/views/HomeAfterSignedIn.vue"));
 
+var _PsychologyCreate = _interopRequireDefault(require("@/views/PsychologyCreate.vue"));
+
 var _PsychologyIndex = _interopRequireDefault(require("@/views/PsychologyIndex.vue"));
 
 var _PsychologyShow = _interopRequireDefault(require("@/views/PsychologyShow.vue"));
@@ -60,6 +62,10 @@ var routes = [{
   path: '/workbook/:id',
   name: 'WorkbookShow',
   component: _WorkbookShow["default"]
+}, {
+  path: '/psychology-create',
+  name: 'PsychologyCreate',
+  component: _PsychologyCreate["default"]
 }, {
   path: '/psychologies',
   name: 'PsychologyIndex',

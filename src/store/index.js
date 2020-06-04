@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     user: [],
     signedIn: false,
-    workbooks: []
   },
   mutations: {
     fetchUser(state, user) {

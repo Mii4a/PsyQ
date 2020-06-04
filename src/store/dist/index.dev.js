@@ -18,8 +18,7 @@ _vue["default"].use(_vuex["default"]);
 var _default = new _vuex["default"].Store({
   state: {
     user: [],
-    signedIn: false,
-    workbooks: []
+    signedIn: false
   },
   mutations: {
     fetchUser: function fetchUser(state, user) {

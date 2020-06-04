@@ -1,6 +1,7 @@
 import About from '@/views/About.vue'
 import Home from '@/views/Home.vue'
 import HomeAfterSignedIn from '@/views/HomeAfterSignedIn.vue'
+import PsychologyCreate from '@/views/PsychologyCreate.vue'
 import PsychologyIndex from '@/views/PsychologyIndex.vue'
 import PsychologyShow from '@/views/PsychologyShow.vue'
 import Questions from '@/views/Questions.vue'
@@ -44,6 +45,11 @@ const routes = [{
     path: '/workbook/:id',
     name: 'WorkbookShow',
     component: WorkbookShow
+  },
+  {
+    path: '/psychology-create',
+    name: 'PsychologyCreate',
+    component: PsychologyCreate
   },
   {
     path: '/psychologies',
