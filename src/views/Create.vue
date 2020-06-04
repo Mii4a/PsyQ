@@ -1,14 +1,17 @@
 <template lang="pug">
-  div.psychology-create
+  div.create
     app-section-title(
-      section-title="PsychoForm"
+      section-title="Create"
     )
-    div.psychology-create--container
+    div.create--container
       app-auth-form(
         v-if="!adminUser"
         @child-event="fetchAuth"
       )
-      
+      router-view(
+        v-if="adminUser"
+      )
+
 
 </template>
 
@@ -17,7 +20,7 @@ import AppAuthForm from '@/components/AppAuthForm'
 import AppSectionTitle from '@/components/AppSectionTitle'
 
 export default {
-  name: 'PsychologyCreate',
+  name: 'Create',
   components: {
     AppAuthForm,
     AppSectionTitle
@@ -40,6 +43,7 @@ export default {
     fetchAuth (payload) {
       if (payload) {
         this.adminUser = payload
+        this.$router.replace('/create/psychology')
       }
     }
   }
@@ -47,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.psychology-create {
+.create {
   &--container {
     padding: 15px 8%;
   }

@@ -2,7 +2,7 @@
 div.question-start-button
   div.question-start-button--container
     router-link(
-      :to="{path: `/questions`, query: { workbook: `${workbookId}`}}"
+      :to="{path: `/question`, query: { workbook: `${workbookId}`}}"
       )
       p.question-start-button--container__message
         |  スタート

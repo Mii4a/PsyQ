@@ -5,19 +5,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _About = _interopRequireDefault(require("@/views/About.vue"));
+var _CreateAnswer = _interopRequireDefault(require("@/components/CreateAnswer.vue"));
+
+var _CreatePsychology = _interopRequireDefault(require("@/components/CreatePsychology.vue"));
+
+var _CreateQuestion = _interopRequireDefault(require("@/components/CreateQuestion.vue"));
+
+var _CreateWorkbook = _interopRequireDefault(require("@/components/CreateWorkbook.vue"));
+
+var _Create = _interopRequireDefault(require("@/views/Create.vue"));
 
 var _Home = _interopRequireDefault(require("@/views/Home.vue"));
 
 var _HomeAfterSignedIn = _interopRequireDefault(require("@/views/HomeAfterSignedIn.vue"));
 
-var _PsychologyCreate = _interopRequireDefault(require("@/views/PsychologyCreate.vue"));
-
 var _PsychologyIndex = _interopRequireDefault(require("@/views/PsychologyIndex.vue"));
 
 var _PsychologyShow = _interopRequireDefault(require("@/views/PsychologyShow.vue"));
 
-var _Questions = _interopRequireDefault(require("@/views/Questions.vue"));
+var _Question = _interopRequireDefault(require("@/views/Question.vue"));
 
 var _Result = _interopRequireDefault(require("@/views/Result.vue"));
 
@@ -36,36 +42,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 _vue["default"].use(_vueRouter["default"]);
 
 var routes = [{
+  path: '/create',
+  name: 'Create',
+  component: _Create["default"],
+  children: [{
+    path: '/create/answer',
+    name: 'CreateAnswer',
+    component: _CreateAnswer["default"]
+  }, {
+    path: '/create/psychology',
+    name: 'CreatePsychology',
+    component: _CreatePsychology["default"]
+  }, {
+    path: '/create/question',
+    name: 'CreateQuestion',
+    component: _CreateQuestion["default"]
+  }, {
+    path: '/create/workbook',
+    name: 'CreateWorkbook',
+    component: _CreateWorkbook["default"]
+  }]
+}, {
   path: '/',
   name: 'Home',
   component: _Home["default"]
 }, {
-  path: '/about',
-  name: 'About',
-  // route level code-splitting
-  // this generates a separate chunk (about.[hash].js) for this route
-  // which is lazy-loaded when the route is visited.
-  component: _About["default"]
-}, {
-  path: '/signup',
-  name: 'Signup',
-  component: _Signup["default"]
-}, {
-  path: '/signin',
-  name: 'Signin',
-  component: _Signin["default"]
-}, {
   path: '/home',
   name: 'HomeAfterSignedIn',
   component: _HomeAfterSignedIn["default"]
-}, {
-  path: '/workbook/:id',
-  name: 'WorkbookShow',
-  component: _WorkbookShow["default"]
-}, {
-  path: '/psychology-create',
-  name: 'PsychologyCreate',
-  component: _PsychologyCreate["default"]
 }, {
   path: '/psychologies',
   name: 'PsychologyIndex',
@@ -75,13 +79,21 @@ var routes = [{
   name: 'psychologyShow',
   component: _PsychologyShow["default"]
 }, {
-  path: '/questions',
-  name: 'questions',
-  component: _Questions["default"]
+  path: '/question',
+  name: 'question',
+  component: _Question["default"]
 }, {
   path: '/result',
   name: 'result',
   component: _Result["default"]
+}, {
+  path: '/signin',
+  name: 'Signin',
+  component: _Signin["default"]
+}, {
+  path: '/signup',
+  name: 'Signup',
+  component: _Signup["default"]
 }, {
   path: '/workbooks/:id',
   name: 'workbookShow',

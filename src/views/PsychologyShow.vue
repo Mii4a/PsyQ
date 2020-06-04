@@ -4,6 +4,10 @@
       section-title="Selects"
       )
     div.psychology-show--container
+      b-alert(
+        :show="checkWorkbook"
+      )
+        | まだ問題が作られていないようです。別の分野の問題を探してみましょう！
       app-workbook-link(
         v-for="workbook in workbooks"
         :key="workbook.id"
@@ -29,16 +33,25 @@ export default {
   data () {
     return {
       psychology: [],
-      workbooks: []
+      workbooks: [],
+      noWorkbooks: null
     }
   },
-  mounted() {
-    this.checkSignedIn()
+  computed: {
+    checkWorkbook () {
+      const workbooks = this.workbooks
+      if (workbooks.length === 0) {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   updated() {
     this.checkSignedIn()
   },
-  created () {
+  mounted () {
+    this.checkSignedIn()
     this.getPsychologyAndWorkbooks()
   },
   methods: {
