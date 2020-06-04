@@ -77,13 +77,13 @@ export default {
       text-decoration: none;
     }
     &__button {
-      border: 3px solid #fffafa;
+      border: 3px solid #333;
       border-radius: 15px;
       height: 40px;
       padding: 5px 0;
       margin-bottom: 15px;
       width: 200px;
-      color: #fff;
+      color: #333;
     }
     .bi{
       font-size: 20px;

@@ -31,7 +31,7 @@ exports.securedAxiosInstance = securedAxiosInstance;
 
 var plainAxiosInstance = _axios["default"].create({
   baseURL: API_URL,
-  withCredentials: 'include',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
