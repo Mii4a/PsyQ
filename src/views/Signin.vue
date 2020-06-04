@@ -7,6 +7,11 @@
         variant="warning"
       )
         | ログインして下さい
+      b-alert(
+        :show="errorObj"
+        variant="danger"
+      )
+        | Eメール・パスワードに間違いがあります
       b-form(@submit.prevent="signin")
         b-form-group(label="Eメール" label-for="email")
           b-form-input#email(v-model="email" type="text")
@@ -33,6 +38,7 @@ export default {
     return {
       email: '',
       password: '',
+      errorObj: null,
       error: '',
       expired: null
     }
@@ -69,6 +75,7 @@ export default {
       this.$router.replace('/home')
     },
     signInFailed (error) {
+      this.errorObj = true
       this.error = (error.response && error.response.data && error.response.data.error) || ''
       delete localStorage.csrf
       delete localStorage.signedIn
