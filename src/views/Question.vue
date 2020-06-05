@@ -251,7 +251,7 @@ export default {
       font-size: 1rem;
       margin-bottom: 10px;
       min-height: 100px;
-      padding: 10px 8%;
+      padding: 20px 8%;
     }
     &__number {
       font-weight: bold;

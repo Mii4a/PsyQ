@@ -83,7 +83,7 @@ export default {
   &--container {
     display: inline-block;
     font-weight: bold;
-    padding: 0 8%;
+    padding: 5px 8%;
     width: 100%;
   }
 }
