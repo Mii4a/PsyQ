@@ -25,6 +25,7 @@ export default {
   padding-top: 15px;
   &--container {
     border: 4px solid #22aabb;
+    border-radius: 20px;
     padding: 20px 10px 10px;
     text-align: center;
     &__icon {

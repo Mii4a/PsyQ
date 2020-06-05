@@ -3,21 +3,20 @@
     app-section-title(
       section-title="Workbook"
       )
-    div.workbook-show--container
+    app-loading(
+      v-if="loading"
+      )
+    div.workbook-show--container(
+      v-if="!loading"
+    )
       div.workbook-information
         div.workbook-information--name
           span.workbook-information--name__bracket.bracket-left()
-          app-loading(
-            v-if="loading"
-          )
-          span(
-            v-if="!loading"
-          )
-            | {{ workbook.subject_name }}
+          | {{ workbook.subject_name }}
           span.workbook-information--name__bracket.bracket-right
         div.explanation-before-starting
           span {{ "問題数は" + workbook.questions_count + "問です" }}
-          p {{ "一題につき、制限時間は60秒です" }}
+          p {{ "一題ごとの制限時間は30秒です" }}
       app-question-start-button(
         :workbook-id="workbookId"
         )
@@ -40,6 +39,7 @@ export default {
   },
   data () {
     return {
+      loading: true,
       workbookId: this.$route.params['id'],
       workbook: [],
       questions: []
@@ -57,6 +57,7 @@ export default {
       ).then((response) => {
         this.workbook = response.data.workbook
         this.questions = response.data.questions
+        this.loading = false
       }).catch(
         error => setError(error)
       )

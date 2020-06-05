@@ -18,7 +18,8 @@ export default {
     },
     limitTime: {
       type: String,
-      required: true
+      required: true,
+      default: '30'
     },
     totalQuestionNumber: {
       type: Number,
