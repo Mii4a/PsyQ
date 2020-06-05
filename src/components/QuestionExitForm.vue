@@ -54,7 +54,7 @@ export default {
 <style lang="scss" scoped>
 .question-exit-form {
   background-color: rgba(34, 187, 176, .2);
-  padding: 25% 10% 46%;
+  padding: 25% 10% 50%;
   text-align: center;
   &--buttons {
     padding-top: 10px;
