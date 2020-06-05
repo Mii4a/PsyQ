@@ -46,12 +46,10 @@ export default {
   bottom: 0;
   box-shadow: 0 -12px 10px -3px rgba(0, 0, 0, .1);
   height: 65px;
-  padding: 0 10px;
   position: fixed;
   width: 100%;
   &--button {
     border-radius: none;
-    box-shadow: 2px 0px 10px -3px rgba(0, 0, 0, .1) inset;
     padding-top: 17px;
     text-align: center;
     width: 33%;

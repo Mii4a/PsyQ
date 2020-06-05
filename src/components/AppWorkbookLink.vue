@@ -58,24 +58,9 @@ export default {
   font-size: .8rem;
   padding-top: 3px;
 }
-.workbook-name {
-  color: #777;
-  font-size: 1.2rem;
-  padding: 5px 10px 0;
-  text-decoration: none;
-}
-.workbook-information {
-  background-color: #11aa99;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  color: #fff;
-  font-size: .8rem;
-  padding: 0 10px;
-  text-decoration: none;
-}
 .workbook-link {
   height: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   transition: ease .1s;
   width: 100%;
   &:hover {
@@ -85,6 +70,21 @@ export default {
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+  }
+  .workbook-name {
+    color: #777;
+    font-size: 1.2rem;
+    padding: 8px 10px 2px;
+    text-decoration: none;
+  }
+  .workbook-information {
+    background-color: #11aa99;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #fff;
+    font-size: .9rem;
+    padding: 1px 10px;
+    text-decoration: none;
   }
 }
 </style>

@@ -66,14 +66,13 @@ export default {
   width: 40px;
 }
 .psychology-link {
-  height: 60px;
   margin-bottom: 15px;
   width: 100%;
   &--container {
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 10px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .3);
-    padding: 10px 15px;
+    padding: 15px 20px;
     &__left {
       width: 30%;
     }
