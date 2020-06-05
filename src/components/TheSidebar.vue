@@ -55,8 +55,8 @@ export default{
     }
   },
   methods: {
-    logout() {
-      this.$http.secured.delete(process.env.VUE_APP_API + `logout`, {
+    async logout() {
+      await this.$http.secured.delete(process.env.VUE_APP_API + `logout`, {
          headers: {'Authorization': 'Bearer ' + process.env.VUE_APP_API_TOKEN}
          }).then(response => {
            delete localStorage.csrf

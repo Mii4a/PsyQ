@@ -2,6 +2,11 @@
   div#app
     b-container(fluid)
       router-view
+    transition(
+      name="sidebar-transition"
+      enter-active-class="animated backInRight"
+      leave-active-class="animated backOutLeft"
+    )
     TheSidebar
 </template>
 
