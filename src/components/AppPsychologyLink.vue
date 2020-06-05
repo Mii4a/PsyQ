@@ -1,6 +1,6 @@
 <template lang="pug">
   div.psychology-link
-    router-link(
+    router-link.link(
       :to="{path: `${linkTo}`, query: { category: `${query}` }}")
       div.psychology-link--container.d-flex
         div.psychology-link--container__left
@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.link {
+  color: #fff;
+}
 .psychology-category {
   color: #777;
   font-size: 1.2rem;
@@ -55,7 +58,7 @@ export default {
   color: #fff;
   font-size: 1.2rem;
   height: 40px;
-  padding-top: 7px;
+  padding: 6px 0 0 1px;
   text-align: center;
   width: 40px;
 }

@@ -64,7 +64,7 @@ export default {
   transition: ease .1s;
   width: 100%;
   &:hover {
-    transform: scale(1.1);
+    border-bottom: 0;
   }
   &--container {
     border: 1px solid rgba(0, 0, 0, .2);

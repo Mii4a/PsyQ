@@ -34,7 +34,7 @@ export default {
     return {
       psychology: [],
       workbooks: [],
-      noWorkbooks: null
+      checkWorkbooks: null
     }
   },
   computed: {
