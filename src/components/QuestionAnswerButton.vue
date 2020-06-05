@@ -30,12 +30,15 @@ export default {
     border-bottom: 1px solid #22bbaa;
     border-top: 1px solid #22bbaa;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 10px;
     padding: 10px 20px;
     &__number {
-      font-weight: bold;
+      font-weight: normal;
       margin-right: 10px;
+    }
+    &__option {
+      font-weight: bold;
     }
   }
 }
