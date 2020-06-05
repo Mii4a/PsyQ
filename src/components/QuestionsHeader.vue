@@ -1,6 +1,6 @@
 <template lang="pug">
 div.questions-header
-  div.questions-header--container.
+  div.questions-header--container.exit
   div.questions-header--container.limit-time
     | {{ limitTime }}
   div.questions-header--container.question-number

@@ -88,7 +88,6 @@ export default {
       let n = 0
       this.explanationObj = setInterval(() => {
         if (n <= this.splidExplanation.length) {
-          console.log(n)
           this.explanation.push(this.splidExplanation[n])
           n++
         } else {

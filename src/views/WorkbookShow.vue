@@ -6,8 +6,14 @@
     div.workbook-show--container
       div.workbook-information
         div.workbook-information--name
-          span.workbook-information--name__bracket.bracket-left
-          | {{ workbook.subject_name }}
+          span.workbook-information--name__bracket.bracket-left()
+          app-loading(
+            v-if="loading"
+          )
+          span(
+            v-if="!loading"
+          )
+            | {{ workbook.subject_name }}
           span.workbook-information--name__bracket.bracket-right
         div.explanation-before-starting
           span {{ "問題数は" + workbook.questions_count + "問です" }}
@@ -20,6 +26,7 @@
 
 <script>
 import AppBottomNavigation from '@/components/AppBottomNavigation'
+import AppLoading from '@/components/AppLoading'
 import AppSectionTitle from '@/components/AppSectionTitle'
 import AppQuestionStartButton from '@/components/AppQuestionStartButton'
 
@@ -27,6 +34,7 @@ export default {
   name: 'WorkbookShow',
   components: {
     AppBottomNavigation,
+    AppLoading,
     AppSectionTitle,
     AppQuestionStartButton
   },

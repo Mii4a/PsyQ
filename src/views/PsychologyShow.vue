@@ -3,7 +3,12 @@
     app-section-title(
       section-title="Selects"
       )
-    div.psychology-show--container
+    app-loading(
+      v-if="loading"
+    )
+    div.psychology-show--container(
+      v-if="!loading"
+    )
       b-alert(
         :show="checkWorkbook"
       )
@@ -20,6 +25,7 @@
 
 <script>
 import AppBottomNavigation from '@/components/AppBottomNavigation'
+import AppLoading from '@/components/AppLoading'
 import AppSectionTitle from '@/components/AppSectionTitle'
 import AppWorkbookLink from '@/components/AppWorkbookLink'
 
@@ -27,14 +33,15 @@ export default {
   name: "PsychologyShow",
   components: {
     AppBottomNavigation,
+    AppLoading,
     AppSectionTitle,
     AppWorkbookLink
   },
   data () {
     return {
+      loading: true,
       psychology: [],
       workbooks: [],
-      checkWorkbooks: null
     }
   },
   computed: {
@@ -74,6 +81,7 @@ export default {
           response => {
             this.psychology = response.data.psychology
             this.workbooks = response.data.workbooks
+            this.loading = false
           }
         ).catch(
           error => setError(error)

@@ -1,7 +1,12 @@
 <template lang="pug">
   div.psychology-index
     app-section-title(section-title="Category")
-    div.psychology-index--container
+    app-loading(
+      v-if="loading"
+    )
+    div.psychology-index--container(
+      v-if="!loading"
+    )
       app-psychology-link(
         v-for="psychology in psychologies"
         :key="psychology.id"
@@ -15,6 +20,7 @@
 
 <script>
 import AppBottomNavigation from '@/components/AppBottomNavigation'
+import AppLoading from '@/components/AppLoading'
 import AppPsychologyLink from '@/components/AppPsychologyLink'
 import AppSectionTitle from '@/components/AppSectionTitle'
 
@@ -22,6 +28,7 @@ export default {
   name: 'PsychologyIndex',
   components: {
     AppBottomNavigation,
+    AppLoading,
     AppPsychologyLink,
     AppSectionTitle,
   },
@@ -29,6 +36,7 @@ export default {
     return {
       error: "",
       errorObj: null,
+      loading: true,
       psychologies: []
     }
   },
@@ -56,9 +64,10 @@ export default {
       const gettingUrl = process.env.VUE_APP_API + route
       await this.$http.secured.get(
         gettingUrl
-        ).then(
-          response => this.psychologies = response.data
-        ).catch(
+        ).then(response => {
+          this.psychologies = response.data
+          this.loading = false
+        }).catch(
           error => this.setError(error)
         )
     },
