@@ -15,14 +15,18 @@ module.exports = {
           options: {
             cacheName: 'api',
             expiration: {
-              maxAgeSeconds: 60 * 60 * 24
+              maxAgeSeconds: 86400
             },
             cacheableResponse: {
-              statuses: [0, 200]
+              statuses: [
+                0,
+                200
+              ]
             }
           }
         }
       ]
-    }
+    },
+    name: 'PSYCHOLO'
   },
 };

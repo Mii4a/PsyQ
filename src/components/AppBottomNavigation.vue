@@ -50,7 +50,7 @@ export default {
   width: 100%;
   &--button {
     border-radius: none;
-    padding-top: 17px;
+    padding-top: 15px;
     text-align: center;
     width: 33%;
     &__icon {
