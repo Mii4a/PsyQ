@@ -77,9 +77,10 @@ export default {
       text-decoration: none;
     }
     &__button {
+      background-color: rgba(0, 0, 0, .1);
       border: 3px solid #333;
       border-radius: 15px;
-      height: 40px;
+      font-size: 1.1rem;
       padding: 5px 0;
       margin-bottom: 15px;
       width: 200px;
