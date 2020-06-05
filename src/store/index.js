@@ -6,8 +6,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: [],
+    exit: false,
     signedIn: false,
+    user: [],
   },
   mutations: {
     fetchUser(state, user) {
@@ -16,8 +17,8 @@ export default new Vuex.Store({
     fetchSignedIn (state) {
       state.signedIn = !!localStorage.signedIn
     },
-    fetchWorkbooks (state, workbooks) {
-      state.workbooks = workbooks
+    fetchExit (state) {
+      state.exit = true
     }
   },
   actions: {
@@ -27,8 +28,8 @@ export default new Vuex.Store({
     doFetchSignedIn ({commit}) {
       commit('fetchSignedIn')
     },
-    doFetchWorkbooks ({commit}, workbooks) {
-      commit('fetchWorkbooks', workbooks)
+    doFetchExit ({commit}) {
+      commit('fetchExit')
     }
   },
   getters,

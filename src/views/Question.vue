@@ -7,38 +7,51 @@
       :limit-time="limitTime"
       :path="setWayBackwithParams"
       :totalQuestionNumber="totalQuestionNumber"
+      @click-exit="switchExit"
     )
-    div.question--container
+    question-exit-form(
+      v-if="exitObj"
+      :basicCategory="basicCategory"
+      :category="category"
+      :path="setWayBackwithParams"
+      @not-exit="switchExit"
+    )
+    div.question--container(
+      v-if="!exitObj"
+    )
       p.question--container__explanation
         | {{ showExplanation }}
-    question-answer(
+      question-correct-answer(
         v-if="showCorrectAnswer"
         :correct-answer="correctAnswer"
         :current-question-number="currentQuestionNumber"
         :is-answer="isAnswer"
         :next-time="nextTime"
         :total-question-number="totalQuestionNumber"
-      )
-    div.answer-form
-      question-answer-button(
-        v-for="(choice, index) in choices"
-        :key="choice.id"
-        :option="choice.option"
-        :number="answerNumber[index]"
-        @click.native="checkAnswer(choice.is_answer)"
-      )
+        )
+      div.answer-form
+        question-answer-button(
+          v-for="(choice, index) in choices"
+          :key="choice.id"
+          :option="choice.option"
+          :number="answerNumber[index]"
+          @click.native="checkAnswer(choice.is_answer)"
+        )
 </template>
 
 <script>
-import QuestionHeader from '@/components/QuestionHeader'
 import QuestionAnswerButton from '@/components/QuestionAnswerButton'
-import QuestionAnswer from '@/components/QuestionAnswer'
+import QuestionCorrectAnswer from '@/components/QuestionCorrectAnswer'
+import QuestionExitForm from '@/components/QuestionExitForm'
+import QuestionHeader from '@/components/QuestionHeader'
+
 
 export default {
   name: "Question",
   components: {
     QuestionAnswerButton,
-    QuestionAnswer,
+    QuestionCorrectAnswer,
+    QuestionExitForm,
     QuestionHeader
   },
   data () {
@@ -53,6 +66,7 @@ export default {
       currentQuestion: [],
       currentQuestionNumber: 1,
       error: "",
+      exitObj: false,
       explanation: [],
       explanationObj: null,
       isAnswer: false,
@@ -117,7 +131,7 @@ export default {
         this.countUntilNextQuestion()
       }
     },
-    checkSignedIn() {
+    checkSignedIn () {
       if (!localStorage.signedIn) {
         this.$router.replace({
           path: '/signin',
@@ -148,6 +162,16 @@ export default {
           this.countUntilNextQuestion()
         }
       }, 1000)
+    },
+    switchExit () {
+      const exit = this.exitObj
+      if (exit) {
+        this.exitObj = false
+        this.decreaseLimitTime()
+      } else {
+        this.exitObj = true
+        clearInterval(this.limitTimeObj)
+      }
     },
     getChoices () {
       const answers = this.answers

@@ -20,7 +20,7 @@ div.answer
 
 <script>
 export default {
-  name: "QuestionAnswer",
+  name: "QuestionCorrectAnswer",
   props: {
     correctAnswer: {
       type: String,

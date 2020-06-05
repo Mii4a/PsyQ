@@ -1,31 +1,25 @@
 <template lang="pug">
 div.question-header
-  div.question-header--container.exit
-    router-link.icon(
-        :to="{ path: `${path}`, query: { basicCategory: `${basicCategory}`, category: `${category}`} }"
-        )
-        b-icon-x-circle.bottom-nav--button__icon
+  div.question-header--container.exit(
+    @click="clickExit"
+  )
+    b-icon-x-circle.question-header--container__icon
   div.question-header--container.limit-time
     | {{ limitTime }}
   div.question-header--container.question-number
     span.question-number
-      | {{ currentQuestionNumber + '/' + totalQuestionNumber}}
+      | {{ currentQuestionNumber + '/' + totalQuestionNumber }}
 </template>
 
 <script>
 export default {
   name: "QuestionHeader",
+  data () {
+    return {
+      exit: false
+    }
+  },
   props: {
-    basicCategory: {
-      type: String,
-      required: true,
-      default: 'basic'
-    },
-    category: {
-      type: String,
-      required: true,
-      default: 'none'
-    },
     currentQuestionNumber: {
       type: Number,
       require: true,
@@ -36,15 +30,15 @@ export default {
       required: true,
       default: 30
     },
-    path: {
-      type: String,
-      required: true,
-      default: '/home'
-    },
     totalQuestionNumber: {
       type: Number,
       required: true,
       default: 0
+    }
+  },
+  methods: {
+    clickExit () {
+      this.$emit('click-exit')
     }
   }
 }
@@ -60,13 +54,13 @@ export default {
   &--container {
     display: inline-block;
     width: 33%;
+    &__icon {
+      color: #555;
+    }
   }
   .exit {
     font-size: 1.4rem;
     padding-left: 5px;
-    .icon {
-      color: #555;
-    }
   }
   .limit-time {
     font-size: 1.4rem;

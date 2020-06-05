@@ -11,8 +11,8 @@ var _default = {
   signedIn: function signedIn(state) {
     return state.signedIn;
   },
-  workbooks: function workbooks(state) {
-    return state.workbooks;
+  exit: function exit(state) {
+    return state.exit;
   }
 };
 exports["default"] = _default;

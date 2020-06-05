@@ -17,8 +17,9 @@ _vue["default"].use(_vuex["default"]);
 
 var _default = new _vuex["default"].Store({
   state: {
-    user: [],
-    signedIn: false
+    exit: false,
+    signedIn: false,
+    user: []
   },
   mutations: {
     fetchUser: function fetchUser(state, user) {
@@ -27,8 +28,8 @@ var _default = new _vuex["default"].Store({
     fetchSignedIn: function fetchSignedIn(state) {
       state.signedIn = !!localStorage.signedIn;
     },
-    fetchWorkbooks: function fetchWorkbooks(state, workbooks) {
-      state.workbooks = workbooks;
+    fetchExit: function fetchExit(state) {
+      state.exit = true;
     }
   },
   actions: {
@@ -40,9 +41,9 @@ var _default = new _vuex["default"].Store({
       var commit = _ref2.commit;
       commit('fetchSignedIn');
     },
-    doFetchWorkbooks: function doFetchWorkbooks(_ref3, workbooks) {
+    doFetchExit: function doFetchExit(_ref3) {
       var commit = _ref3.commit;
-      commit('fetchWorkbooks', workbooks);
+      commit('fetchExit');
     }
   },
   getters: _getters["default"],
