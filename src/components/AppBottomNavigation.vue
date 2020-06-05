@@ -45,17 +45,19 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, .1);
   bottom: 0;
   box-shadow: 0 -12px 10px -3px rgba(0, 0, 0, .1);
-  height: 50px;
+  height: 65px;
+  padding: 0 10px;
   position: fixed;
   width: 100%;
   &--button {
     border-radius: none;
-    padding-top: 13px;
+    box-shadow: 2px 0px 10px -3px rgba(0, 0, 0, .1) inset;
+    padding-top: 17px;
     text-align: center;
     width: 33%;
     &__icon {
       color: #22bbaa;
-      font-size: 1.4rem;
+      font-size: 2rem;
       font-weight: bold;
     }
   }
