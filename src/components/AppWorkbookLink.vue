@@ -1,7 +1,7 @@
 <template lang="pug">
   div.workbook-link
     router-link.link(
-      :to="{path: '/workbooks/' + `${id}`}"
+      :to="{path: '/workbooks/' + `${id}`, query: { basicCategory: `${basicCategory}`, category: `${category}`, psychologyId: `${psychologyId}` }}"
       )
       div.workbook-link--container
         div.workbook-name
@@ -21,7 +21,26 @@
 export default {
   name: "AppWorkbookLink",
   props: {
+    basicCategory: {
+      type: String,
+      required: true,
+      default: 'basic'
+    },
+    category: {
+      type: String,
+      required: true,
+      default: 'learning'
+    },
     id: {
+      type: Number,
+      required: true
+    },
+    psychologyId: {
+      type: Number,
+      required: true,
+      default: 1
+    },
+    questionsCount: {
       type: Number,
       required: true
     },
@@ -29,11 +48,7 @@ export default {
       type: String,
       required: true
     },
-    questionsCount: {
-      type: Number,
-      required: true
-    }
-  }
+  },
 }
 </script>
 

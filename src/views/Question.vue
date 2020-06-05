@@ -1,14 +1,17 @@
 <template lang="pug">
-  div.questions
-    questions-header(
+  div.question
+    question-header(
+      :basic-category="basicCategory"
+      :category="category"
       :currentQuestionNumber="currentQuestionNumber"
-      :limit-time="restOfLimitTime"
+      :limit-time="limitTime"
+      :path="setWayBackwithParams"
       :totalQuestionNumber="totalQuestionNumber"
     )
-    div.questions--container
-      p.questions--container__explanation
+    div.question--container
+      p.question--container__explanation
         | {{ showExplanation }}
-    questions-answer(
+    question-answer(
         v-if="showCorrectAnswer"
         :correct-answer="correctAnswer"
         :current-question-number="currentQuestionNumber"
@@ -17,7 +20,7 @@
         :total-question-number="totalQuestionNumber"
       )
     div.answer-form
-      questions-answer-button(
+      question-answer-button(
         v-for="(choice, index) in choices"
         :key="choice.id"
         :option="choice.option"
@@ -27,21 +30,23 @@
 </template>
 
 <script>
-import QuestionsHeader from '@/components/QuestionsHeader'
-import QuestionsAnswerButton from '@/components/QuestionsAnswerButton'
-import QuestionsAnswer from '@/components/QuestionsAnswer'
+import QuestionHeader from '@/components/QuestionHeader'
+import QuestionAnswerButton from '@/components/QuestionAnswerButton'
+import QuestionAnswer from '@/components/QuestionAnswer'
 
 export default {
-  name: "Questions",
+  name: "Question",
   components: {
-    QuestionsAnswerButton,
-    QuestionsAnswer,
-    QuestionsHeader
+    QuestionAnswerButton,
+    QuestionAnswer,
+    QuestionHeader
   },
   data () {
     return {
       answers: [],
       answerNumber: ["A", "B", "C"],
+      basicCategory: this.$route.query.basicCategory,
+      category: this.$route.query.category,
       choices: [],
       correctAnswer: "",
       correctAnswerCount: 0,
@@ -55,17 +60,21 @@ export default {
       limitTimeObj: null,
       nextTime: 5,
       nextTimeObj: null,
+      psychologyId: 0,
       questions: [],
       showCorrectAnswer: false,
       splidExplanation: [],
       totalQuestionNumber: 0,
+      wayBack: '/psychologies',
       workbook: []
     }
   },
   computed: {
-    restOfLimitTime () {
-      let limitTime = this.limitTime.toString()
-      return limitTime
+    setWayBackwithParams () {
+      const route = this.wayBack
+      const params = this.psychologyId
+      const paramsRoute = route + '/' + params
+      return paramsRoute
     },
     showExplanation () {
       let explanation = this.explanation.join('')
@@ -118,6 +127,16 @@ export default {
         })
       }
     },
+    countUntilNextQuestion () {
+      this.nextTimeObj = setInterval(() => {
+        if (this.nextTime > 0) {
+          this.nextTime--
+        } else {
+          clearInterval(this.nextTimeObj)
+          this.nextQuestion()
+        }
+      }, 1000);
+    },
     decreaseLimitTime () {
       this.limitTimeObj = setInterval(() => {
         if (this.limitTime > 0) {
@@ -129,16 +148,6 @@ export default {
           this.countUntilNextQuestion()
         }
       }, 1000)
-    },
-    countUntilNextQuestion () {
-      this.nextTimeObj = setInterval(() => {
-        if (this.nextTime > 0) {
-          this.nextTime--
-        } else {
-          clearInterval(this.nextTimeObj)
-          this.nextQuestion()
-        }
-      }, 1000);
     },
     getChoices () {
       const answers = this.answers
@@ -153,6 +162,7 @@ export default {
         const questions = response.data.questions
         this.answers = response.data.answers
         this.workbook = response.data.workbook
+        this.psychologyId = this.workbook.psychology_id
         this.questions = this.shuffleArray(questions)
         this.totalQuestionNumber = this.questions.length
         this.setCurrentQuestion()
@@ -168,7 +178,7 @@ export default {
           query: {
             correctAnswerCount: this.correctAnswerCount,
             totalQuestionNumber: this.totalQuestionNumber,
-            psychologyId: this.workbook.psychology_id
+            psychologyId: this.psychologyId
         }})
       }
     },
@@ -210,7 +220,7 @@ export default {
   width: 100%;
 }
 
-.questions {
+.question {
   &--container {
     &__explanation {
       background-color: rgba(0, 0, 0, .1);

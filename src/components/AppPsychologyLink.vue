@@ -1,7 +1,7 @@
 <template lang="pug">
   div.psychology-link
     router-link.link(
-      :to="{path: `${linkTo}`, query: { category: `${query}` }}")
+      :to="{path: `${linkTo}`, query: { basicCategory: `${basicCategory}`, category: `${category}` }}")
       div.psychology-link--container.d-flex
         div.psychology-link--container__left
           div.psychology-icon
@@ -19,9 +19,15 @@
 export default {
   name: "AppPsychologyLink",
   props: {
-    query: {
+    basicCategory: {
       type: String,
-      required: true
+      required: true,
+      default: 'basic'
+    },
+    category: {
+      type: String,
+      required: true,
+      default: 'none'
     },
     count: {
       type: String,

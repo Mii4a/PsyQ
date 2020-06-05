@@ -9,7 +9,7 @@ div.answer-button
 
 <script>
 export default {
-  name: "QuestionsAnswerButton",
+  name: "QuestionAnswerButton",
   props: {
     option: {
       type: String,

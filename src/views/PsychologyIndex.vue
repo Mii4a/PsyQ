@@ -9,8 +9,9 @@
     )
       app-psychology-link(
         v-for="psychology in psychologies"
+        :basic-category="basicCategory"
         :key="psychology.id"
-        :query="psychology.field"
+        :category="psychology.field"
         :japanese-field-name="psychology.japanese_field_name"
         :font-awesome-icon="psychology.font_awesome_icon"
         :link-to="'/psychologies/' + `${psychology.id}`"
@@ -34,10 +35,11 @@ export default {
   },
   data () {
     return {
-      error: "",
+      basicCategory: this.$route.query.basicCategory,
+      error: '',
       errorObj: null,
       loading: true,
-      psychologies: []
+      psychologies: [],
     }
   },
   created () {
@@ -59,8 +61,8 @@ export default {
       }
     },
     async getPsychologies () {
-      const field = this.$route.query.category
-      const route = field + '_psychologies'
+      const basicCategory = this.$route.query.basicCategory
+      const route = basicCategory + '_psychologies'
       const gettingUrl = process.env.VUE_APP_API + route
       await this.$http.secured.get(
         gettingUrl

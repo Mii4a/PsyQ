@@ -2,7 +2,7 @@
 div.question-start-button
   div.question-start-button--container
     router-link(
-      :to="{path: `/question`, query: { workbook: `${workbookId}`}}"
+      :to="{path: `/question`, query: { basicCategory: `${basicCategory}`, category: `${category}`, workbook: `${workbookId}`}}"
       )
       p.question-start-button--container__message
         |  スタート
@@ -10,8 +10,18 @@ div.question-start-button
 
 <script>
 export default {
-  name: "AppQuestionStartButton",
+  name: "WorkbookQuestionStartButton",
   props: {
+    basicCategory: {
+      type: String,
+      required: true,
+      default: 'basic'
+    },
+    category: {
+      type: String,
+      required: true,
+      default: 'learning'
+    },
     workbookId: {
       type: String,
       required: true

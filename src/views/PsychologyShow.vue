@@ -14,13 +14,18 @@
       )
         | まだ問題が作られていないようです。別の分野の問題を探してみましょう！
       app-workbook-link(
-        v-for="workbook in workbooks"
-        :key="workbook.id"
+        v-for="workbook in workbooks" :key="workbook.id"
+        :basicCategory="basicCategory"
+        :category="category"
         :id="workbook.id"
-        :subject-name="workbook.subject_name"
         :questions-count="workbook.questions_count"
+        :psychology-id="psychology.id"
+        :subject-name="workbook.subject_name"
       )
-    app-bottom-navigation
+    app-bottom-navigation(
+      :basicCategory="basicCategory"
+      :path="wayBack",
+    )
 </template>
 
 <script>
@@ -39,8 +44,11 @@ export default {
   },
   data () {
     return {
+      basicCategory: this.$route.query.basicCategory,
+      category: this.$route.query.category,
       loading: true,
       psychology: [],
+      wayBack: '/psychologies/',
       workbooks: [],
     }
   },
@@ -52,7 +60,7 @@ export default {
       } else {
         return false
       }
-    }
+    },
   },
   updated() {
     this.checkSignedIn()

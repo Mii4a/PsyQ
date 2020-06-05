@@ -2,7 +2,7 @@
   div.bottom-nav.d-flex
     div.bottom-nav--button
       router-link.bottom-nav--button__link(
-        :to="{ path: $store.state.route.from.fullPath }"
+        :to="{ path: `${path}`, query: { basicCategory: `${basicCategory}`, category: `${category}`} }"
         )
         b-icon-box-arrow-in-left.bottom-nav--button__icon
     div.bottom-nav--button.center-button
@@ -17,8 +17,25 @@
 </template>
 
 <script>
-export default{
+export default {
   name: "AppBottomNavigation",
+  props: {
+    basicCategory: {
+      type: String,
+      required: false,
+      default: 'basic'
+    },
+    category: {
+      type: String,
+      required: false,
+      default: 'none'
+    },
+    path: {
+      type: String,
+      required: false,
+      default: '/home'
+    }
+  }
 }
 </script>
 

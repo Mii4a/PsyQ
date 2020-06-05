@@ -5,7 +5,7 @@
       app-psychology-link(
         v-for="psychology in psychologies"
         :key="psychology.field"
-        :query="psychology.category"
+        :basic-category="psychology.category"
         :japanese-field-name="psychology.field"
         :font-awesome-icon="psychology.fontAwesomeIcon"
         link-to="/psychologies"

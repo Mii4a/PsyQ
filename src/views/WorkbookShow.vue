@@ -18,17 +18,23 @@
         div.explanation-before-starting
           span {{ "問題数は" + workbook.questions_count + "問です" }}
           p {{ "一題につき、制限時間は60秒です" }}
-      app-question-start-button(
+      workbook-question-start-button(
+        :basic-category="basicCategory"
+        :category="category"
         :workbook-id="workbookId"
         )
-    app-bottom-navigation
+    app-bottom-navigation(
+      :basic-category="basicCategory"
+      :category="category",
+      :path="setWayBackwithParams"
+    )
 </template>
 
 <script>
 import AppBottomNavigation from '@/components/AppBottomNavigation'
 import AppLoading from '@/components/AppLoading'
 import AppSectionTitle from '@/components/AppSectionTitle'
-import AppQuestionStartButton from '@/components/AppQuestionStartButton'
+import WorkbookQuestionStartButton from '@/components/WorkbookQuestionStartButton'
 
 export default {
   name: 'WorkbookShow',
@@ -36,13 +42,25 @@ export default {
     AppBottomNavigation,
     AppLoading,
     AppSectionTitle,
-    AppQuestionStartButton
+    WorkbookQuestionStartButton
   },
   data () {
     return {
-      workbookId: this.$route.params['id'],
+      basicCategory: this.$route.query.basicCategory,
+      category: this.$route.query.category,
+      loading: true,
+      psychologyId: this.$route.query.psychologyId,
+      wayBack: "/psychologies",
       workbook: [],
-      questions: []
+      workbookId: this.$route.params['id']
+    }
+  },
+  computed: {
+    setWayBackwithParams () {
+      const route = this.wayBack
+      const params = this.psychologyId
+      const paramsRoute = route + '/' + params
+      return paramsRoute
     }
   },
   created () {
@@ -56,7 +74,7 @@ export default {
         gettingUrl
       ).then((response) => {
         this.workbook = response.data.workbook
-        this.questions = response.data.questions
+        this.loading = false
       }).catch(
         error => setError(error)
       )
