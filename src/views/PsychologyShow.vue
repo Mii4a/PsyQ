@@ -65,10 +65,10 @@ export default {
         })
       }
     },
-    getPsychologyAndWorkbooks () {
+    async getPsychologyAndWorkbooks () {
       const psychologyId = this.$route.params['id']
       const gettingUrl = process.env.VUE_APP_API + '/psychologies/' + psychologyId
-      this.$http.secured.get(
+      await this.$http.secured.get(
         gettingUrl
         ).then(
           response => {

@@ -50,11 +50,11 @@ export default {
         })
       }
     },
-    getPsychologies () {
+    async getPsychologies () {
       const field = this.$route.query.category
       const route = field + '_psychologies'
       const gettingUrl = process.env.VUE_APP_API + route
-      this.$http.secured.get(
+      await this.$http.secured.get(
         gettingUrl
         ).then(
           response => this.psychologies = response.data

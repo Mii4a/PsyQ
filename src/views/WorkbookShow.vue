@@ -41,10 +41,10 @@ export default {
     this.getWorkbookAndQuestions()
   },
   methods: {
-    getWorkbookAndQuestions () {
+    async etWorkbookAndQuestions () {
       const workbookId = this.$route.params['id']
       const gettingUrl = process.env.VUE_APP_API + 'workbooks/' + workbookId
-      this.$http.secured.get(
+      await this.$http.secured.get(
         gettingUrl
       ).then((response) => {
         this.workbook = response.data.workbook
