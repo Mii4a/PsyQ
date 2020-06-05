@@ -44,9 +44,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.link {
-  color: #fff;
-}
 .psychology-category {
   color: #777;
   font-size: 1.2rem;

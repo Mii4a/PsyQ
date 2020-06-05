@@ -35,7 +35,7 @@ export default {
       psychologyId: ""
     }
   },
-  mounted() {
+  created() {
     this.checkSignedIn()
     this.getParams()
   },

@@ -1,6 +1,6 @@
 <template lang="pug">
   div.workbook-link
-    router-link(
+    router-link.link(
       :to="{path: '/workbooks/' + `${id}`}"
       )
       div.workbook-link--container

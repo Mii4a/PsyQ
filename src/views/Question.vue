@@ -76,7 +76,7 @@ export default {
       return quizNumber
     }
   },
-  mounted() {
+  created() {
     this.getQuestionsFromWorkbooks()
     this.checkSignedIn()
   },

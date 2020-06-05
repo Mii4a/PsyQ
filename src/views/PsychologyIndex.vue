@@ -32,7 +32,7 @@ export default {
       psychologies: []
     }
   },
-  mounted () {
+  created () {
     this.checkSignedIn()
     this.getPsychologies()
   },

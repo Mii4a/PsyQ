@@ -50,7 +50,7 @@ export default {
   updated() {
     this.checkSignedIn()
   },
-  mounted () {
+  created () {
     this.checkSignedIn()
     this.getPsychologyAndWorkbooks()
   },
