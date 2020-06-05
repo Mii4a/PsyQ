@@ -41,7 +41,7 @@ export default {
     this.getWorkbookAndQuestions()
   },
   methods: {
-    async etWorkbookAndQuestions () {
+    async getWorkbookAndQuestions () {
       const workbookId = this.$route.params['id']
       const gettingUrl = process.env.VUE_APP_API + 'workbooks/' + workbookId
       await this.$http.secured.get(
